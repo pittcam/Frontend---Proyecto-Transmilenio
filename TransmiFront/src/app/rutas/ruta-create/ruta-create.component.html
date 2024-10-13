@@ -1,1 +1,60 @@
-<p>ruta-create works!</p>
+<form (ngSubmit)="crearRuta()" class="ruta-form">
+
+  <!-- Campo de nombre de la ruta -->
+  <div class="form-group">
+    <label for="nombre">Nombre de la ruta:</label>
+    <input type="text" id="nombre" [(ngModel)]="ruta.nombre" name="nombre" required class="form-control">
+  </div>
+
+  <!-- Selector de horaInicial -->
+  <div class="form-group">
+    <label for="horaInicial">Hora de inicio:</label>
+    <select id="horaInicial" [(ngModel)]="ruta.horarioInicio" name="horaInicial" required class="form-control">
+      <option *ngFor="let hora of horas" [value]="hora">{{ hora }}</option>
+    </select>
+  </div>
+
+  <!-- Selector de horaFinal -->
+  <div class="form-group">
+    <label for="horaFinal">Hora de finalización:</label>
+    <select id="horaFinal" [(ngModel)]="ruta.horarioFinal" name="horaFinal" required class="form-control">
+      <option *ngFor="let hora of horas" [value]="hora">{{ hora }}</option>
+    </select>
+  </div>
+
+  <!-- Checkboxes para los días de la semana -->
+  <!-- Checkboxes para los días de la semana -->
+  <div class="form-group">
+    <label>Días de operación:</label>
+    <div class="checkbox-group">
+      <div *ngFor="let dia of dias; let i = index" class="checkbox-item">
+        <input
+          type="checkbox"
+          [value]="i"
+          (change)="onDiaChange($event)"
+          [checked]="ruta.dias.includes(i)">
+        <span>{{ dia }}</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Lista de rutas con checkboxes para estaciones -->
+  <div class="form-group">
+    <label>Estaciones:</label>
+    <div class="checkbox-group">
+      <div *ngFor="let estacion of estaciones" class="checkbox-item">
+        <input
+          type="checkbox"
+          [value]="estacion.id"
+          (change)="onEstacionChange($event)"
+          [checked]="ruta.estacionesIds.includes(estacion.id)">
+        <span>{{ estacion.nombre }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón de creación -->
+  <button type="submit" class="btn btn-create">Crear Ruta</button>
+
+</form>

@@ -1,7 +1,7 @@
-import { ConductorDto } from './conductor-dto';
+import { ConductorDTO } from './conductor-dto';
 
-describe('ConductorDto', () => {
+describe('ConductorDTO', () => {
   it('should create an instance', () => {
-    expect(new ConductorDto()).toBeTruthy();
+    expect(new ConductorDTO()).toBeTruthy();
   });
 });

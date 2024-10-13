@@ -1,1 +1,24 @@
-<p>consulta-view works!</p>
+<div *ngIf="ruta$ | async as ruta; else loading" class="ruta-detalle">
+  <h2>Detalles de la Ruta</h2>
+  <div class="detail-item">
+    <p><strong>Nombre:</strong> {{ ruta.nombre }}</p>
+  </div>
+
+  <div class="detail-item">
+    <p><strong>Estaciones:</strong></p>
+    <ul class="estaciones-list">
+      <li *ngFor="let estacion of (estaciones$ | async) as estaciones">
+        <span *ngIf="ruta.estacionesIds.includes(estacion.id)">
+          {{ estacion.nombre }}
+        </span>
+      </li>
+    </ul>
+  </div>
+
+
+  <button (click)="volver()" class="btn btn-back">Volver a la lista</button>
+</div>
+
+<ng-template #loading>
+  <p class="loading">Cargando...</p>
+</ng-template>

@@ -1,7 +1,7 @@
-import { RutaDto } from './ruta-dto';
+import { RutaDTO } from './ruta-dto';
 
-describe('RutaDto', () => {
+describe('RutaDTO', () => {
   it('should create an instance', () => {
-    expect(new RutaDto()).toBeTruthy();
+    expect(new RutaDTO()).toBeTruthy();
   });
 });

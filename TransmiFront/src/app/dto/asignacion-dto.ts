@@ -1,2 +1,2 @@
-export class AsignacionDto {
+export class AsignacionDTO {
 }

@@ -26,6 +26,7 @@ export const routes: Routes = [
   { path: 'buses/ver/:id', component: BusViewComponent },
   { path: 'buses/editar/:id', component: BusEditComponent },
   { path: 'buses', component: BusListComponent },
+  { path: 'rutas', component: RutaListComponent},
   { path: 'rutas/crear', component: RutaCreateComponent },
   { path: 'rutas/ver/:id', component: RutaViewComponent },
   { path: 'rutas/editar/:id', component: RutaEditComponent },

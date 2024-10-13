@@ -1,7 +1,7 @@
-import { AsignacionDto } from './asignacion-dto';
+import { AsignacionDTO } from './asignacion-dto';
 
-describe('AsignacionDto', () => {
+describe('AsignacionDTO', () => {
   it('should create an instance', () => {
-    expect(new AsignacionDto()).toBeTruthy();
+    expect(new AsignacionDTO()).toBeTruthy();
   });
 });

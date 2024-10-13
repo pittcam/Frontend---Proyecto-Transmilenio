@@ -1,2 +1,2 @@
-export class BusDto {
+export class BusDTO {
 }
