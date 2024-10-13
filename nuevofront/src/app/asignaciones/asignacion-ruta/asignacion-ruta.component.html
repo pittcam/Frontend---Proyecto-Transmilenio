@@ -1,0 +1,13 @@
+<h2>Asignar Rutas al Bus</h2>
+<ul>
+  <li *ngFor="let ruta of rutas">
+    <label>
+      <input
+        type="checkbox"
+        (change)="onRutaChange($event, ruta.id ?? -1)"
+        [checked]="selectedRutaIds.includes(ruta.id ?? -1)" />
+      {{ ruta.nombre }} <!-- Muestra el nombre de la ruta -->
+    </label>
+  </li>
+</ul>
+<button (click)="asignarRutas()">Confirmar Asignación</button>

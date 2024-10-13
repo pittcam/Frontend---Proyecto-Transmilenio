@@ -1,0 +1,28 @@
+<div class="conductor-container">
+  <div class="search-bar">
+    <input type="text" [(ngModel)]="nombreBuscado" placeholder="Buscar..." />
+    <button (click)="buscarConductor()">Buscar</button>
+  </div>
+  <h1>Lista de Conductores</h1>
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+  <button class="create-button" (click)="crearConductor()">Crear Conductor</button>
+
+  <ul *ngIf="allConductors$ | async as allConductores; else loading" class="conductor-list">
+    <li *ngFor="let conductor of allConductores" class="conductor-item">
+      <div class="conductor-info">
+        <span class="conductor-name">{{ conductor.nombre }}</span>
+        <span class="conductor-id">ID: {{ conductor.id }}</span>
+      </div>
+      <div class="conductor-actions">
+        <button class="view-button" (click)="verConductor(conductor.id)">Ver</button>
+        <button class="edit-button" *ngIf="conductor.id !== null" (click)="editarConductor(conductor.id)">Editar</button>
+        <button class="delete-button" (click)="eliminarConductor(conductor.id)">Eliminar</button>
+      </div>
+    </li>
+  </ul>
+
+  <ng-template #loading>
+    <p>Cargando...</p>
+  </ng-template>
+</div>

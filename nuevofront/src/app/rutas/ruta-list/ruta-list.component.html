@@ -1,0 +1,24 @@
+<div class="rutas-container">
+  <h1>Rutas</h1>
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+  <div class="button-container">
+    <!-- Botón para crear una nueva ruta -->
+    <button (click)="crearRuta()" class="btn btn-create">Crear Ruta</button>
+  </div>
+
+  <ul *ngIf="allRutas$ | async as allRutas; else loading" class="rutas-list">
+    <li *ngFor="let ruta of allRutas" class="ruta-item">
+      <span class="ruta-name">{{ ruta.nombre }}</span> <!-- Asegúrate de que las propiedades sean correctas -->
+      <div class="ruta-buttons">
+        <button (click)="verRuta(ruta.id)" class="btn btn-view">Ver</button> <!-- Botón para ver la ruta -->
+        <button *ngIf="ruta.id !== null" (click)="editarRuta(ruta.id)" class="btn btn-edit">Editar</button>
+        <button (click)="eliminarRuta(ruta.id)" class="btn btn-delete">Eliminar</button>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<ng-template #loading>
+  <p>Cargando...</p>
+</ng-template>

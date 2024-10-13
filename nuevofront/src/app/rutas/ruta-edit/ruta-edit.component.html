@@ -1,0 +1,25 @@
+<form (ngSubmit)="actualizarRuta()" class="ruta-form">
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" [(ngModel)]="ruta.nombre" name="nombre" required class="form-control">
+
+  <label>Estaciones:</label>
+  <div class="estaciones-container">
+    <div *ngFor="let estacion of estaciones">
+      <input
+        type="checkbox"
+        [value]="estacion.id"
+        (change)="onEstacionChange($event)"
+        [checked]="ruta.estacionesIds.includes(estacion.id)">
+      {{ estacion.nombre }}
+    </div>
+  </div>
+
+  <label for="horarios">Horarios:</label>
+  <select id="horarios" [(ngModel)]="ruta.horarioFuncionamiento" name="horarios" required class="form-control">
+    <option *ngFor="let horario of horarios" [value]="horario.id">
+      {{ horario.horaInicio }} - {{ horario.horaFin }} - {{ horario.dias }}
+    </option>
+  </select>
+
+  <button type="submit" class="btn btn-update">Actualizar Ruta</button>
+</form>

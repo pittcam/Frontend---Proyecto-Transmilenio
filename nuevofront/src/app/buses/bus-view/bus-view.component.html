@@ -1,0 +1,29 @@
+<div class="bus-detalle">
+  <h2>Detalles del Bus</h2>
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+  <ng-container *ngIf="bus$ | async as bus">
+    <div class="bus-info">
+      <p><strong>ID:</strong> {{ bus.id }}</p>
+      <p><strong>Modelo:</strong> {{ bus.modelo }}</p>
+      <p><strong>Placa:</strong> {{ bus.numeroPlaca }}</p>
+      <button (click)="irAAsignarRutas()" class="btn btn-assign">Asignar Ruta</button>
+    </div>
+
+    <h3>Rutas Asignadas</h3>
+    <table class="rutas-table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let ruta of rutasAsignadas">
+        <td>{{ ruta.id }}</td>
+        <td>{{ ruta.nombre }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </ng-container>
+</div>

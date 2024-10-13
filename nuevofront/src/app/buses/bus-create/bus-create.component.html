@@ -1,0 +1,20 @@
+<div class="crear-bus-container">
+  <h2>Crear Bus</h2>
+
+  <form (ngSubmit)="crearBus()" class="bus-create-form">
+    <div class="form-group">
+      <label for="modelo">Modelo:</label>
+      <input type="text" id="modelo" [(ngModel)]="busDTO.modelo" name="modelo" required>
+    </div>
+
+    <div class="form-group">
+      <label for="numeroPlaca">Número de Placa:</label>
+      <input type="text" id="numeroPlaca" [(ngModel)]="busDTO.numeroPlaca" name="numeroPlaca" required>
+    </div>
+
+    <div class="form-buttons">
+      <button type="submit" class="btn btn-create">Crear Bus</button>
+      <button type="button" class="btn btn-cancel" (click)="verBuses()">Cancelar</button>
+    </div>
+  </form>
+</div>

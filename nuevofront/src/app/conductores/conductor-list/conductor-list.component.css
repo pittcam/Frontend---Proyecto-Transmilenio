@@ -1,0 +1,123 @@
+.conductor-container {
+  max-width: 800px; /* Ancho máximo para el contenedor */
+  margin: 0 auto; /* Centrar horizontalmente */
+  padding: 20px; /* Espaciado interno */
+  background-color: #f9f9f9; /* Color de fondo suave */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+h1 {
+  text-align: center; /* Centrar el texto del encabezado */
+  color: #333; /* Color de texto */
+}
+
+.error-message {
+  color: red; /* Color rojo para mensajes de error */
+  text-align: center; /* Centrar el mensaje de error */
+}
+
+.create-button {
+  display: block; /* Para que el botón ocupe toda la línea */
+  margin: 20px auto; /* Centrar horizontalmente */
+  padding: 10px 20px; /* Espaciado interno */
+  background-color: yellow; /* Botón amarillo */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambiar cursor al pasar por encima */
+  font-size: 16px; /* Tamaño de fuente */
+}
+
+.create-button:hover {
+  background-color: orange; /* Cambiar color al pasar el ratón */
+}
+
+.conductor-list {
+  list-style-type: none; /* Sin viñetas en la lista */
+  padding: 0; /* Sin espaciado interno */
+}
+
+.conductor-item {
+  display: flex; /* Usar flexbox para alinear elementos */
+  justify-content: space-between; /* Espacio entre elementos */
+  align-items: center; /* Alinear verticalmente */
+  padding: 10px; /* Espaciado interno */
+  border-bottom: 1px solid #ddd; /* Línea divisoria */
+}
+
+.conductor-info {
+  flex: 1; /* Permitir que esta sección ocupe espacio */
+}
+
+.conductor-name {
+  font-weight: bold; /* Nombre en negrita */
+  color: #555; /* Color del nombre */
+}
+
+.conductor-id {
+  color: #888; /* Color del ID */
+  margin-left: 10px; /* Espaciado entre el nombre y el ID */
+}
+
+.conductor-actions {
+  display: flex; /* Usar flexbox para botones de acción */
+  gap: 10px; /* Espacio entre botones */
+}
+
+.conductor-actions button {
+  padding: 5px 10px; /* Espaciado interno para botones de acción */
+  border: none; /* Sin borde */
+  color: white; /* Texto blanco */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cambiar cursor al pasar por encima */
+}
+
+.view-button {
+  background-color: #2196F3; /* Color azul para el botón Ver */
+}
+
+.view-button:hover {
+  background-color: #1976D2; /* Color más oscuro al pasar el ratón */
+}
+
+.edit-button {
+  background-color: #FFC107; /* Color amarillo para el botón Editar */
+}
+
+.edit-button:hover {
+  background-color: #FFA000; /* Color más oscuro al pasar el ratón */
+}
+
+.delete-button {
+  background-color: #F44336; /* Color rojo para el botón Eliminar */
+}
+
+.delete-button:hover {
+  background-color: #D32F2F; /* Color más oscuro al pasar el ratón */
+}
+.search-bar {
+  margin-top: 5vw;
+  width: 10vw;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.search-bar input[type="text"] {
+  width:400px;
+  padding: 10px;
+  border: black 1px solid;
+  border-radius: 5px;
+}
+
+.search-bar button {
+  width: 15vw;
+  padding: 10px;
+  margin-left: 5vw;
+  border-radius: 5px;
+  background-color: yellow;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}

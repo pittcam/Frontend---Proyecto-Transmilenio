@@ -1,0 +1,28 @@
+<div class="ruta-container">
+
+  <div class="general">
+    <div class="search-bar">
+      <input type="text" [(ngModel)]="nombreBuscado" placeholder="Buscar..." />
+      <button (click)="buscarRuta()">Buscar</button>
+    </div>
+
+    <h1>Rutas Existentes</h1>
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+    <ul *ngIf="allRutas$ | async as allRutas; else loading" class="ruta-list">
+      <li *ngFor="let ruta of allRutas" class="ruta-item">
+        <div class="ruta-info">
+          <span class="ruta-codigo">{{ ruta.nombre }}</span>
+          <span class="conductor-horario">ID: {{ ruta.horarioFuncionamiento }}</span>
+        </div>
+        <div class="ruta-actions">
+          <button class="view-button" (click)="verRuta(ruta.id)">Ver</button>
+
+        </div>
+      </li>
+    </ul>
+
+    <ng-template #loading>
+      <p>Cargando...</p>
+    </ng-template>
+  </div>

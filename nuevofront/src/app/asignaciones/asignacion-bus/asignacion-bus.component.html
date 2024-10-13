@@ -1,0 +1,22 @@
+<div class="asignar-bus-container">
+  <h2>Asignar Bus al Conductor</h2>
+
+  <form (ngSubmit)="asignarBus()" class="bus-assignment-form">
+    <!-- Selección de Bus -->
+    <div class="form-group">
+      <label for="bus">Seleccionar Bus:</label>
+      <select id="bus" [(ngModel)]="selectedBusId" name="bus" required>
+        <option value="" disabled>Seleccione un bus</option>
+        <option *ngFor="let bus of buses" [value]="bus.id">
+          {{ bus.modelo }} - {{ bus.numeroPlaca }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="confirm-button">Confirmar Asignación</button>
+    </div>
+  </form>
+
+  <p *ngIf="mensaje" class="message">{{ mensaje }}</p>
+</div>

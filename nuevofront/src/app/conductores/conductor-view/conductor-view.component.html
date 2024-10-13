@@ -1,0 +1,28 @@
+<div class="conductor-view-container">
+  <h2>Detalles del Conductor</h2>
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+  <ng-container *ngIf="conductor$ | async as conductor">
+    <div class="conductor-details">
+      <p><strong>Nombre:</strong> <span>{{ conductor.nombre }}</span></p>
+      <p><strong>Cédula:</strong> <span>{{ conductor.cedula }}</span></p>
+      <p><strong>Teléfono:</strong> <span>{{ conductor.telefono }}</span></p>
+      <p><strong>Dirección:</strong> <span>{{ conductor.direccion }}</span></p>
+    </div>
+
+    <h3>Buses Asignados</h3>
+    <ul *ngIf="busesAsignados$ | async as busesAsignados; else noBuses">
+      <li *ngFor="let bus of busesAsignados">{{ bus.modelo }} - {{ bus.numeroPlaca }}</li>
+    </ul>
+    <ng-template #noBuses>
+      <p>No tiene ningún bus asignado.</p>
+    </ng-template>
+
+    <button
+      [disabled]="!conductor.id"
+      (click)="asignarBus(conductor.id)"
+      class="assign-button">
+      Asignar Bus
+    </button>
+  </ng-container>
+</div>

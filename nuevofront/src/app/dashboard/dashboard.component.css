@@ -1,0 +1,44 @@
+/* Estilos para la barra de menú */
+.navbar {
+  background-color: #d52b1e; /* Rojo Transmilenio */
+  padding: 10px; /* Espaciado interno */
+  display: flex; /* Flexbox para organizar los botones en línea */
+  justify-content: space-around; /* Espaciado uniforme entre los botones */
+  position: sticky; /* Mantener la barra en la parte superior */
+  top: 0; /* Posición fija en la parte superior */
+  z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+}
+
+/* Estilos para los botones */
+.menu-button {
+  background-color: #f9e84d; /* Amarillo para botones */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 10px 20px; /* Espaciado interno del botón */
+  cursor: pointer; /* Cambia el cursor al pasar el mouse */
+  font-weight: bold; /* Texto en negrita */
+  transition: background-color 0.3s; /* Transición suave */
+}
+
+.menu-button:hover {
+  background-color: #f4d600; /* Color al pasar el mouse */
+}
+
+/* Estilos para el contenedor del dashboard */
+.dashboard {
+  text-align: center; /* Centramos el texto */
+  padding: 20px; /* Espaciado interno del dashboard */
+}
+
+/* Estilos para el mensaje de bienvenida */
+.welcome-message {
+  font-size: 1.5em; /* Tamaño de fuente más grande */
+  margin: 20px 0; /* Margen superior e inferior */
+}
+
+/* Estilos para instrucciones */
+.instruction {
+  font-size: 1.2em; /* Tamaño de fuente más pequeño */
+  color: #555; /* Color gris para las instrucciones */
+  margin-top: 10px; /* Margen superior */
+}

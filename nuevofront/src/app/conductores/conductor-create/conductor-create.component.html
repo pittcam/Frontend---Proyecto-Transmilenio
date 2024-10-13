@@ -1,0 +1,22 @@
+<div class="create-conductor-container">
+  <h1>Crear Conductor</h1>
+
+  <form (ngSubmit)="crearConductor()" class="conductor-form">
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" [(ngModel)]="conductorDTO.nombre" name="name" required>
+
+    <label for="cedula">Cédula:</label>
+    <input type="text" id="cedula" [(ngModel)]="conductorDTO.cedula" name="cedula" required>
+
+    <label for="telefono">Teléfono:</label>
+    <input type="text" id="telefono" [(ngModel)]="conductorDTO.telefono" name="telefono" required>
+
+    <label for="direccion">Dirección:</label>
+    <input type="text" id="direccion" [(ngModel)]="conductorDTO.direccion" name="direccion" required>
+
+    <div class="form-buttons">
+      <button type="submit" class="submit-button">Crear Conductor</button>
+      <button type="button" (click)="verConductores()" class="view-button">Ver Conductores</button>
+    </div>
+  </form>
+</div>
