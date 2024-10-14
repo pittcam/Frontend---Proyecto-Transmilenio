@@ -12,7 +12,7 @@
 
     <h3>Buses Asignados</h3>
     <ul *ngIf="busesAsignados$ | async as busesAsignados; else noBuses">
-      <li *ngFor="let bus of busesAsignados">{{ bus.modelo }} - {{ bus.numeroPlaca }}</li>
+      <li *ngFor="let bus of busesAsignados">{{ bus.modelo }} - {{ bus.placa }}</li>
     </ul>
     <ng-template #noBuses>
       <p>No tiene ningún bus asignado.</p>
