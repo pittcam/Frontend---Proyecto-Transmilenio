@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common'; // Agrega esta importación
 export class RutaCreateComponent implements OnInit {
   ruta: RutaDTO = { id: null, nombre: '', estacionesIds: [], horaInicio: '', horaFin: '', dias: [] };
   estaciones: EstacionDTO[] = [];
-  diasSemana: string[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+  diasSemana: string[] = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
   horas: Date[] = [];
   error: string = '';
 

@@ -12,16 +12,16 @@
       <input type="text" id="numeroPlaca" [(ngModel)]="busDTO.numeroPlaca" name="numeroPlaca" required>
     </div> <!-- Cierre del div que faltaba -->
 
-
+    <div class="tabla-lista">
     <ul *ngIf="allRutas$ | async as allRutas" class="rutas-list">
       <li *ngFor="let ruta of allRutas" class="ruta-item">
         <span class="ruta-name">{{ ruta.nombre }}</span> <!-- Asegúrate de que las propiedades sean correctas -->
         <div class="ruta-buttons">
-          <button (click)="verRuta(ruta.id)" class="btn btn-view">Ver Ruta</button>
-          <button *ngIf="ruta.id !== null" (click)="seleccionarDias(ruta.id)" class="btn btn-edit">Seleccionar días</button>
+          <button (click)="verRuta(ruta.id)" class="btn btn-view">Seleccionar días</button>
         </div>
       </li>
     </ul>
+    </div>
 
 
     <div class="form-buttons">

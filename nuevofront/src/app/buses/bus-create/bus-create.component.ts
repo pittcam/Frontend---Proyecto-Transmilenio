@@ -53,10 +53,9 @@ export class BusCreateComponent implements OnInit {
   }
 
   verRuta(id: number | null): void {
-    // Lógica para ver la ruta
+    if (id !== null) {
+      this.router.navigate(['buses/seleccionar-dias', id]); // Redirigir a la vista de la ruta con el id
+    }
   }
 
-  seleccionarDias(id: number): void {
-    // Lógica para seleccionar días de la ruta
-  }
 }

@@ -16,6 +16,7 @@ import { AsignacionBusComponent } from './asignaciones/asignacion-bus/asignacion
 import { AsignacionRutaComponent } from './asignaciones/asignacion-ruta/asignacion-ruta.component';
 import { RutasListComponent} from './usuario/rutas-list/rutas-list.component';
 import { RutasViewComponent} from './usuario/rutas-view/rutas-view.component';
+import { SeleccionarDiasComponent} from './buses/seleccionar-dias/seleccionar-dias.component';
 
 
 export const routes: Routes = [
@@ -36,5 +37,6 @@ export const routes: Routes = [
   { path: 'consulta/:id', component: RutasViewComponent},
   { path: 'asignaciones/asignar-bus/:conductorId', component: AsignacionBusComponent},
   { path: 'asignaciones/asignar-ruta/:id', component: AsignacionRutaComponent },
+  { path: 'buses/seleccionar-dias/:id', component: SeleccionarDiasComponent},
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' } // Redirección al dashboard
 ];
