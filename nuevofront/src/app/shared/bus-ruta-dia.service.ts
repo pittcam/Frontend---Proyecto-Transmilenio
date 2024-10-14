@@ -21,4 +21,8 @@ export class BusRutaDiaService {
   guardarDias(busRutaDia: BusRutaDiaDTO): Observable<any> {
     return this.http.post<any>(`${environment.SERVER_URL}/guardar-dias`, busRutaDia);
   }
+  getBusesRutaDiaDisponibles(): Observable<BusRutaDiaDTO[]> {
+    return this.http.get<BusRutaDiaDTO[]>(`${environment.SERVER_URL}/bus-ruta-dia/disponibles`);
+  }
+
 }

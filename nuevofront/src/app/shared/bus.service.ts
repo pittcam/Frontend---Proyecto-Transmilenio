@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { BusDTO } from '../dto/bus-dto';
-import {RutaDTO} from '../dto/ruta-dto'; // Asegúrate de que esta ruta sea correcta
+import {RutaDTO} from '../dto/ruta-dto';
+import {BusRutaDiaDTO} from '../dto/bus-ruta-dia-dto'; // Asegúrate de que esta ruta sea correcta
 
 @Injectable({
   providedIn: 'root', // Asegúrate de que el servicio esté disponible en toda la aplicación
@@ -45,8 +46,9 @@ export class BusService {
     return this.http.delete<void>(`${environment.SERVER_URL}/bus/${id}`, this.httpOptions);
   }
 
+  // Método para obtener los buses con sus rutas y días
   getBusesDisponibles(): Observable<BusDTO[]> {
-    return this.http.get<BusDTO[]>(`${environment.SERVER_URL}/bus/disponibles`); // Asegúrate que esta ruta sea correcta
+    return this.http.get<BusDTO[]>(`${environment.SERVER_URL}/bus/disponibles`);
   }
 
   // Método para asignar una ruta a un bus
