@@ -20,10 +20,9 @@ import {first} from 'rxjs/operators';
   templateUrl: './rutas-view.component.html',
   styleUrl: './rutas-view.component.css'
 })
-export class RutasViewComponent implements OnInit{
+export class RutasViewComponent implements OnInit {
   ruta$!: Observable<RutaDTO | null>;
-  estaciones$!: Observable<EstacionDTO[] | null>;
-
+  estaciones: EstacionDTO[] = [];  // Creamos la variable local
   errorMessage: string = '';
 
   constructor(
@@ -36,6 +35,7 @@ export class RutasViewComponent implements OnInit{
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
+    // Obtener la ruta por ID
     this.ruta$ = this.rutaService.obtenerRuta(id).pipe(
       catchError(error => {
         this.errorMessage = 'Error al cargar los datos de la ruta';
@@ -43,16 +43,18 @@ export class RutasViewComponent implements OnInit{
       })
     );
 
-    // Cargar estaciones
-    this.estaciones$ = this.estacionService.obtenerEstaciones();
-
+    // Cargar las estaciones y almacenarlas en la variable local
+    this.estacionService.obtenerEstaciones().subscribe({
+      next: (data: EstacionDTO[]) => {
+        this.estaciones = data;
+      },
+      error: (error) => {
+        console.error('Error al cargar estaciones:', error);
+      }
+    });
   }
-
-
 
   volver(): void {
     this.router.navigate(['/usuario']);
   }
-
 }
-

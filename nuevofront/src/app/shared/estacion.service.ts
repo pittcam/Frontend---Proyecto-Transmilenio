@@ -20,5 +20,5 @@ export class EstacionService {
   obtenerEstaciones(): Observable<EstacionDTO[]> {
     return this.http.get<EstacionDTO[]>(`${environment.SERVER_URL}/estaciones`);
   }
-
 }
+

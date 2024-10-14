@@ -1,13 +1,26 @@
-<div *ngIf="ruta$ | async as ruta; else loading" class="ruta-detalle">
+<div *ngIf="ruta$ | async as ruta" class="ruta-detalle">
   <h2>Detalles de la Ruta</h2>
+
   <div class="detail-item">
+    <p><strong>ID:</strong> {{ ruta.id }}</p>
     <p><strong>Nombre:</strong> {{ ruta.nombre }}</p>
+    <p><strong>Hora de inicio:</strong> {{ ruta.horaInicio }}</p>
+    <p><strong>Hora de fin:</strong> {{ ruta.horaFin }}</p>
+  </div>
+
+  <div class="detail-item">
+    <p><strong>Días de la semana:</strong></p>
+    <ul class="dias-list">
+      <li *ngFor="let dia of ruta.dias">
+        {{ dia }}
+      </li>
+    </ul>
   </div>
 
   <div class="detail-item">
     <p><strong>Estaciones:</strong></p>
     <ul class="estaciones-list">
-      <li *ngFor="let estacion of (estaciones$ | async) as estaciones">
+      <li *ngFor="let estacion of estaciones">
         <span *ngIf="ruta.estacionesIds.includes(estacion.id)">
           {{ estacion.nombre }}
         </span>
@@ -15,11 +28,5 @@
     </ul>
   </div>
 
-
   <button (click)="volver()" class="btn btn-back">Volver a la lista</button>
 </div>
-
-<ng-template #loading>
-  <p class="loading">Cargando...</p>
-</ng-template>
-

@@ -2,9 +2,9 @@ export class RutaDTO {
   constructor(
     public id: number | null,
     public nombre: string,
-    public estacionesIds: number[], // IDs de las estaciones seleccionadas
-    public horaInicio: number,
-    public horaFinal: number,
-    public dias: string[],
+    public estacionesIds: number[],  // Volvemos a usar IDs
+    public horaInicio: string,
+    public horaFin: string,
+    public dias: string[]
   ) {}
 }

@@ -15,7 +15,7 @@
   <!-- Hora Final -->
   <div class="form-group">
     <label for="horaFinal">Hora de Fin:</label>
-    <select id="horaFinal" [(ngModel)]="ruta.horaFinal" name="horaFinal" required class="form-control">
+    <select id="horaFinal" [(ngModel)]="ruta.horaFin" name="horaFinal" required class="form-control">
       <option *ngFor="let hora of horas" [value]="hora">{{ hora | date: 'HH:mm' }}</option>
     </select>
   </div>
@@ -45,6 +45,9 @@
       </div>
     </div>
   </div>
+
+
+
 
   <button type="submit" class="btn btn-create">Crear Ruta</button>
 </form>
