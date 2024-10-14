@@ -21,12 +21,13 @@
     <p><strong>Estaciones:</strong></p>
     <ul class="estaciones-list">
       <li *ngFor="let estacion of estaciones">
-        <span *ngIf="ruta.estacionesIds.includes(estacion.id)">
-          {{ estacion.nombre }}
-        </span>
+      <span *ngIf="ruta.estacionesIds.includes(estacion.id)">
+        {{ estacion.nombre }}
+      </span>
       </li>
     </ul>
   </div>
+
 
   <button (click)="volver()" class="btn btn-back">Volver a la lista</button>
 </div>

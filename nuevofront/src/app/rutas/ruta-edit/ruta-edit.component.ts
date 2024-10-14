@@ -103,24 +103,26 @@ export class RutaEditComponent implements OnInit {
   }
 
 
-
-
   actualizarRuta(): void {
     if (this.ruta.id !== null) {
+      console.log('Datos a enviar:', this.ruta); // Verificar qué datos se están enviando
+
       this.rutaService.actualizarRuta(this.ruta.id, this.ruta).subscribe({
-        next: (data) => {
-          console.log('Ruta actualizada:', data);
+        next: () => {
+          console.log('Ruta actualizada correctamente');
+          // Redirigir después de la actualización
           this.router.navigate(['/rutas']);
         },
-        error: (error: any) => {
+        error: (error) => {
           console.error('Error al actualizar la ruta:', error);
           this.error = 'Hubo un error al actualizar la ruta';
-        },
+        }
       });
     } else {
       this.error = 'ID de ruta no válido';
     }
   }
+
 
   verRutas(): void {
     this.router.navigate(['/rutas']);

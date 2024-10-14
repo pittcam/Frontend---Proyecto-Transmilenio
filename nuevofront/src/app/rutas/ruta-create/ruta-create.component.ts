@@ -76,35 +76,37 @@ export class RutaCreateComponent implements OnInit {
   }
 
   onEstacionChange(event: any): void {
-    const estacionId = +event.target.value;  // Convertir el valor a número
+    const estacionId = +event.target.value;
 
     if (event.target.checked) {
-      // Añadir el ID si no está ya presente
       if (!this.ruta.estacionesIds.includes(estacionId)) {
-        this.ruta.estacionesIds.push(estacionId);
+        this.ruta.estacionesIds.push(estacionId);  // Agregar ID
       }
     } else {
-      // Eliminar el ID si se desmarca
-      this.ruta.estacionesIds = this.ruta.estacionesIds.filter(id => id !== estacionId);
+      this.ruta.estacionesIds = this.ruta.estacionesIds.filter(id => id !== estacionId);  // Eliminar ID
     }
+    console.log('Estaciones seleccionadas:', this.ruta.estacionesIds);
   }
+
 
 
 
 
   crearRuta(): void {
+    console.log('Datos de la ruta a crear:', this.ruta);  // Verificar los datos
+
     this.rutaService.crearRuta(this.ruta).subscribe({
       next: (data) => {
         console.log('Ruta creada:', data);
-        // Redirigir a la lista de rutas después de la creación
-        this.router.navigate(['/rutas']);
+        this.router.navigate(['/rutas']);  // Redirigir después de crear
       },
       error: (error) => {
-        console.log('Error al crear la ruta:', error);
+        console.error('Error al crear la ruta:', error);
         this.error = 'Hubo un error al crear la ruta';
-      },
+      }
     });
   }
+
 
   verRutas(): void {
     this.router.navigate(['/rutas']);
