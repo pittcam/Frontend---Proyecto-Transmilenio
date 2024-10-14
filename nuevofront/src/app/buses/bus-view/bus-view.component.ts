@@ -38,8 +38,6 @@ export class BusViewComponent implements OnInit {
         return of(null);
       })
     );
-
-    this.cargarRutasAsignadas(id);
   }
 
   cargarRutasAsignadas(busId: number): void {
