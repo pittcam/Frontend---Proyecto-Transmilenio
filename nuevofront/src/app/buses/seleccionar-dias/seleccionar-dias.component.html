@@ -1,8 +1,7 @@
-
-<div *ngIf="ruta$ | async as ruta" class="ruta-detalle">
+<form (ngSubmit)="guardarDias()" class="bus-create-form">
+  <div *ngIf="ruta$ | async as ruta" class="ruta-detalle">
 
   <h2>Detalles de la Ruta</h2>
-
   <div class="detail-item">
     <p><strong>ID:</strong> {{ ruta.id }}</p>
     <p><strong>Nombre:</strong> {{ ruta.nombre }}</p>
@@ -31,6 +30,7 @@
       </li>
     </ul>
   </div>
-
-  <button (click)="volver()" class="btn btn-back">Volver a la lista</button>
-</div>
+    <button type="submit" class="btn btn-escoger">Guardar días Ruta</button>
+  <button (click)="volver()" class="btn btn-back">Volver</button>
+  </div>
+</form>

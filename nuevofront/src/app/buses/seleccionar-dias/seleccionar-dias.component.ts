@@ -6,6 +6,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {RutaService} from '../../shared/ruta.service';
 import {EstacionService} from '../../shared/estacion.service';
 import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {BusRutaDiaDTO} from '../../dto/bus-ruta-dia-dto';
 
 @Component({
   selector: 'app-seleccionar-dias',
@@ -13,7 +15,9 @@ import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
   imports: [
     AsyncPipe,
     NgIf,
-    NgForOf
+    NgForOf,
+    FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './seleccionar-dias.component.html',
   styleUrl: './seleccionar-dias.component.css'
@@ -24,6 +28,8 @@ export class SeleccionarDiasComponent implements OnInit{
   estaciones: EstacionDTO[] = [];  // Declaramos la variable aquí
   errorMessage: string = '';
   diasSemana: string[] = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+  busRutaDia: BusRutaDiaDTO = new BusRutaDiaDTO();
+
 
   constructor(
     private route: ActivatedRoute,
@@ -70,5 +76,9 @@ export class SeleccionarDiasComponent implements OnInit{
         this.ruta.dias.splice(index, 1);
       }
     }
+  }
+
+  guardarDias() {
+
   }
 }
