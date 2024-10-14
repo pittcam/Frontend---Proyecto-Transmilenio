@@ -13,7 +13,7 @@
   <ul *ngIf="allBuses$ | async as allBuses; else loading" class="bus-list">
     <li *ngFor="let bus of allBuses" class="bus-item">
       <span class="bus-info">
-        {{ bus.numeroPlaca }} - {{ bus.modelo }} <!-- Asegúrate de que las propiedades sean correctas -->
+        {{ bus.placa }} - {{ bus.modelo }} <!-- Asegúrate de que las propiedades sean correctas -->
       </span>
       <div class="bus-buttons">
         <button (click)="verBus(bus.id)" class="view-button">Ver</button>

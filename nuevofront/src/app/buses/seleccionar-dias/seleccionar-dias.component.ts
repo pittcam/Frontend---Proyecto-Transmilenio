@@ -19,6 +19,7 @@ import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
   styleUrl: './seleccionar-dias.component.css'
 })
 export class SeleccionarDiasComponent implements OnInit{
+  ruta: RutaDTO = { id: null, nombre: '', estacionesIds: [], horaInicio: '', horaFin: '', dias: [] };
   ruta$!: Observable<RutaDTO | null>;
   estaciones: EstacionDTO[] = [];  // Declaramos la variable aquí
   errorMessage: string = '';

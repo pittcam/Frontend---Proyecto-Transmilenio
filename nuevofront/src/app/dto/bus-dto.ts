@@ -1,7 +1,7 @@
 export class BusDTO {
   constructor(
     public id: number | null,
-    public numeroPlaca: string,
+    public placa: string,
     public modelo: string
   ) {}
 }

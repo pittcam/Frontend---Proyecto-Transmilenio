@@ -10,7 +10,7 @@
 
     <div class="form-group">
       <label for="numeroPlaca">Número de Placa:</label>
-      <input type="text" id="numeroPlaca" [(ngModel)]="busDTO.numeroPlaca" name="numeroPlaca" required>
+      <input type="text" id="numeroPlaca" [(ngModel)]="busDTO.placa" name="numeroPlaca" required>
     </div>
 
     <ul *ngIf="allRutas$ | async as allRutas" class="rutas-list">
