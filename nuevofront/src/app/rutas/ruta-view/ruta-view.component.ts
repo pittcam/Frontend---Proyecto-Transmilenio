@@ -44,21 +44,6 @@ export class RutaViewComponent implements OnInit {
     // Cargar estaciones
     this.estaciones$ = this.estacionService.obtenerEstaciones();
 
-    // Obtener el horario específico basado en el id de horarioFuncionamiento de la ruta
-    this.ruta$.subscribe(ruta => {
-      if (ruta) {
-        this.horarioService.obtenerHorarios().pipe(
-          first(), // Esto solo recupera los horarios una vez
-          catchError(error => {
-            this.errorMessage = 'Error al cargar los horarios';
-            return of([]);
-          })
-        ).subscribe(horarios => {
-          // Busca el horario que corresponde a la ruta usando el id de horarioFuncionamiento
-          this.horarioSeleccionado = horarios.find(h => h.id === ruta.horarioFuncionamiento) || null;
-        });
-      }
-    });
   }
 
   volver(): void {

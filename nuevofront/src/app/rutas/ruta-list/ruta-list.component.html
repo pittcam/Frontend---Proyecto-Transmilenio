@@ -7,7 +7,7 @@
     <button (click)="crearRuta()" class="btn btn-create">Crear Ruta</button>
   </div>
 
-  <ul *ngIf="allRutas$ | async as allRutas; else loading" class="rutas-list">
+  <ul *ngIf="allRutas$ | async as allRutas" class="rutas-list">
     <li *ngFor="let ruta of allRutas" class="ruta-item">
       <span class="ruta-name">{{ ruta.nombre }}</span> <!-- Asegúrate de que las propiedades sean correctas -->
       <div class="ruta-buttons">
@@ -18,7 +18,3 @@
     </li>
   </ul>
 </div>
-
-<ng-template #loading>
-  <p>Cargando...</p>
-</ng-template>

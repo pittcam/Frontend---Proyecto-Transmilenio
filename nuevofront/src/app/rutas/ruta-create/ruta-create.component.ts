@@ -6,7 +6,6 @@ import { EstacionDTO } from '../../dto/estacion-dto';
 import { HorarioDTO } from '../../dto/horario-dto';
 import { FormsModule } from '@angular/forms';
 import { EstacionService } from '../../shared/estacion.service';
-import { HorarioService } from '../../shared/horario.service';
 import { CommonModule } from '@angular/common'; // Agrega esta importación
 
 @Component({
@@ -17,44 +16,70 @@ import { CommonModule } from '@angular/common'; // Agrega esta importación
   styleUrls: ['./ruta-create.component.css'],
 })
 export class RutaCreateComponent implements OnInit {
-  ruta: RutaDTO = { id: null, nombre: '', estacionesIds: [], horarioFuncionamiento: null };
+  ruta: RutaDTO = { id: null, nombre: '', estacionesIds: [], horaInicio: 0, horaFinal: 0, dias: [] };
   estaciones: EstacionDTO[] = [];
-  horarios: HorarioDTO[] = [];
+  diasSemana: string[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+  horas: number[] = [];
   error: string = '';
 
   constructor(
     private rutaService: RutaService,
     private estacionService: EstacionService,
-    private horarioService: HorarioService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.cargarEstaciones();
-    this.cargarHorarios();
+    this.generarHoras(); // Llamar a la función para generar horas de 5:00 a 21:00
+  }
+
+  generarHoras(): void {
+    const horaInicio = 5;
+    const horaFin = 21;
+    for (let hora = horaInicio; hora <= horaFin; hora++) {
+      this.horas.push(hora);
+    }
   }
 
   cargarEstaciones(): void {
-     this.estacionService.obtenerEstaciones().subscribe({
-       next: (data: EstacionDTO[]) => {
-         this.estaciones = data;
-         console.log('Estaciones cargadas:', this.estaciones);
-       },
-       error: (error) => {
-         console.error('Error al cargar estaciones:', error);
-       }
-     });
-   }
-
-  cargarHorarios(): void {
-    this.horarioService.obtenerHorarios().subscribe({
-      next: (data: HorarioDTO[]) => {
-        this.horarios = data;
+    this.estacionService.obtenerEstaciones().subscribe({
+      next: (data: EstacionDTO[]) => {
+        this.estaciones = data;
+        console.log('Estaciones cargadas:', this.estaciones);
       },
       error: (error) => {
-        console.error('Error al cargar horarios:', error);
+        console.error('Error al cargar estaciones:', error);
       }
     });
+  }
+
+  onDiaChange(event: any): void {
+    const dia = event.target.value;
+    if (event.target.checked) {
+      // Añadir el día a la lista si está seleccionado
+      this.ruta.dias.push(dia);
+    } else {
+      // Eliminar el día si se deselecciona
+      const index = this.ruta.dias.indexOf(dia);
+      if (index > -1) {
+        this.ruta.dias.splice(index, 1);
+      }
+    }
+  }
+
+  onEstacionChange(event: any): void {
+    const estacionId = +event.target.value; // Convertir el id a número
+
+    if (event.target.checked) {
+      // Si el checkbox está marcado, añade el ID a las estaciones seleccionadas
+      this.ruta.estacionesIds.push(estacionId);
+    } else {
+      // Si el checkbox no está marcado, elimina el ID de las estaciones seleccionadas
+      const index = this.ruta.estacionesIds.indexOf(estacionId);
+      if (index > -1) {
+        this.ruta.estacionesIds.splice(index, 1);
+      }
+    }
   }
 
   crearRuta(): void {
@@ -74,20 +99,4 @@ export class RutaCreateComponent implements OnInit {
   verRutas(): void {
     this.router.navigate(['/rutas']);
   }
-
-  onEstacionChange(event: any): void {
-    const estacionId = +event.target.value; // Convertir el id a número
-
-    if (event.target.checked) {
-      // Si el checkbox está marcado, añade el ID a las estaciones seleccionadas
-      this.ruta.estacionesIds.push(estacionId);
-    } else {
-      // Si el checkbox no está marcado, elimina el ID de las estaciones seleccionadas
-      const index = this.ruta.estacionesIds.indexOf(estacionId);
-      if (index > -1) {
-        this.ruta.estacionesIds.splice(index, 1);
-      }
-    }
-  }
-
 }

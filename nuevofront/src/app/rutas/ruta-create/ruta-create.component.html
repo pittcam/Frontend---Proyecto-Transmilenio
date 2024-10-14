@@ -4,6 +4,34 @@
     <input type="text" id="nombre" [(ngModel)]="ruta.nombre" name="nombre" required class="form-control">
   </div>
 
+  <!-- Hora Inicio -->
+  <div class="form-group">
+    <label for="horaInicio">Hora de Inicio:</label>
+    <select id="horaInicio" [(ngModel)]="ruta.horaInicio" name="horaInicio" required class="form-control">
+      <option *ngFor="let hora of horas" [value]="hora">{{ hora | date: 'HH:mm' }}</option>
+    </select>
+  </div>
+
+  <!-- Hora Final -->
+  <div class="form-group">
+    <label for="horaFinal">Hora de Fin:</label>
+    <select id="horaFinal" [(ngModel)]="ruta.horaFinal" name="horaFinal" required class="form-control">
+      <option *ngFor="let hora of horas" [value]="hora">{{ hora | date: 'HH:mm' }}</option>
+    </select>
+  </div>
+
+  <!-- Días de la semana -->
+  <div class="form-group">
+    <label>Días de la Semana:</label>
+    <div class="checkbox-group">
+      <div *ngFor="let dia of diasSemana" class="checkbox-item">
+        <input type="checkbox" [value]="dia" (change)="onDiaChange($event)">
+        <span>{{ dia[0] }}</span> <!-- Mostrar solo la inicial del día -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Estaciones -->
   <div class="form-group">
     <label>Estaciones:</label>
     <div class="checkbox-group">
@@ -16,13 +44,6 @@
         <span>{{ estacion.nombre }}</span>
       </div>
     </div>
-  </div>
-
-  <div class="form-group">
-    <label for="horarios">Horarios:</label>
-    <select id="horarios" [(ngModel)]="ruta.horarioFuncionamiento" name="horarios" multiple required class="form-control">
-      <option *ngFor="let horario of horarios" [value]="horario.id">{{ horario.horaInicio }} - {{ horario.horaFin }} - {{ horario.dias }}</option>
-    </select>
   </div>
 
   <button type="submit" class="btn btn-create">Crear Ruta</button>
