@@ -15,10 +15,9 @@ import { RutaService } from '../../shared/ruta.service';
   styleUrls: ['./bus-create.component.css'],
   imports: [FormsModule, AsyncPipe, NgForOf, NgIf], // Asegúrate de incluir estos módulos aquí
 })
-export class BusCreateComponent implements OnInit {
+export class BusCreateComponent  {
   busDTO: BusDTO = new BusDTO(null, '', ''); // Inicializa el modelo del bus
   error: any;
-  allRutas$!: Observable<RutaDTO[]>; // Observable para las rutas
 
   constructor(
     private busService: BusService,  // Inyecta el servicio de bus
@@ -26,14 +25,6 @@ export class BusCreateComponent implements OnInit {
     private rutaService: RutaService // Inyecta el servicio de ruta
   ) {}
 
-  ngOnInit(): void {
-    this.cargarRutas();
-  }
-
-  cargarRutas(): void {
-    // Llamada al servicio para obtener rutas y asignarlas al observable
-    this.allRutas$ = this.rutaService.obtenerRutas();
-  }
 
   crearBus(): void {
     this.busService.crearBus(this.busDTO).subscribe({
@@ -52,10 +43,5 @@ export class BusCreateComponent implements OnInit {
     this.router.navigate(['/buses']); // Navegar a la lista de buses
   }
 
-  verRuta(id: number | null): void {
-    if (id !== null) {
-      this.router.navigate(['buses/seleccionar-dias', id]); // Redirigir a la vista de la ruta con el id
-    }
-  }
 
 }
