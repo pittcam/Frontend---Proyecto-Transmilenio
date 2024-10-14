@@ -10,7 +10,19 @@
     <div class="form-group">
       <label for="numeroPlaca">Número de Placa:</label>
       <input type="text" id="numeroPlaca" [(ngModel)]="busDTO.numeroPlaca" name="numeroPlaca" required>
-    </div>
+    </div> <!-- Cierre del div que faltaba -->
+
+
+    <ul *ngIf="allRutas$ | async as allRutas" class="rutas-list">
+      <li *ngFor="let ruta of allRutas" class="ruta-item">
+        <span class="ruta-name">{{ ruta.nombre }}</span> <!-- Asegúrate de que las propiedades sean correctas -->
+        <div class="ruta-buttons">
+          <button (click)="verRuta(ruta.id)" class="btn btn-view">Ver Ruta</button>
+          <button *ngIf="ruta.id !== null" (click)="seleccionarDias(ruta.id)" class="btn btn-edit">Seleccionar días</button>
+        </div>
+      </li>
+    </ul>
+
 
     <div class="form-buttons">
       <button type="submit" class="btn btn-create">Crear Bus</button>

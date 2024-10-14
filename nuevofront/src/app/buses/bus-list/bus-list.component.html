@@ -1,4 +1,9 @@
 <div class="bus-list-container">
+
+  <div class="search-bar">
+    <input type="text" [(ngModel)]="nombreBuscado" placeholder="Buscar..." />
+    <button (click)="buscarBus()">Buscar</button>
+  </div>
   <h1>Buses</h1>
   <p>{{ errorMessage }}</p>
 

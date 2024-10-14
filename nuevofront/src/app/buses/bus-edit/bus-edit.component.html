@@ -1,19 +1,30 @@
-<div class="editar-bus-container">
-  <h2>Editar Bus</h2>
+<div class="crear-bus-container">
 
-  <form (ngSubmit)="actualizarBus()" class="bus-edit-form">
-    <div class="form-group">
-      <label for="numeroPlaca">Número de Placa:</label>
-      <input type="text" id="numeroPlaca" [(ngModel)]="busDTO.numeroPlaca" name="numeroPlaca" required>
-    </div>
+  <h2>Crear Bus</h2>
 
+  <form (ngSubmit)="actualizarBus()" class="bus-create-form">
     <div class="form-group">
       <label for="modelo">Modelo:</label>
       <input type="text" id="modelo" [(ngModel)]="busDTO.modelo" name="modelo" required>
     </div>
 
+    <div class="form-group">
+      <label for="numeroPlaca">Número de Placa:</label>
+      <input type="text" id="numeroPlaca" [(ngModel)]="busDTO.numeroPlaca" name="numeroPlaca" required>
+    </div>
+
+    <ul *ngIf="allRutas$ | async as allRutas" class="rutas-list">
+      <li *ngFor="let ruta of allRutas" class="ruta-item">
+        <span class="ruta-name">{{ ruta.nombre }}</span> <!-- Asegúrate de que las propiedades sean correctas -->
+        <div class="ruta-buttons">
+          <button (click)="verRuta(ruta.id)" class="btn btn-view">Ver Ruta</button> <!-- Botón para ver la ruta -->
+          <button *ngIf="ruta.id !== null" (click)="seleccionarDias(ruta.id)" class="btn btn-edit">Seleccionar días</button>
+        </div>
+      </li>
+    </ul>
+
     <div class="form-buttons">
-      <button type="submit" class="btn btn-update">Actualizar Bus</button>
+      <button type="submit" class="btn btn-create">Crear Bus</button>
       <button type="button" class="btn btn-cancel" (click)="verBuses()">Cancelar</button>
     </div>
   </form>

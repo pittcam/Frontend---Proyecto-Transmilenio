@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
-import { BusDTO } from '../dto/bus-dto'; // Asegúrate de que esta ruta sea correcta
+import { BusDTO } from '../dto/bus-dto';
+import {RutaDTO} from '../dto/ruta-dto'; // Asegúrate de que esta ruta sea correcta
 
 @Injectable({
   providedIn: 'root', // Asegúrate de que el servicio esté disponible en toda la aplicación
@@ -26,6 +27,10 @@ export class BusService {
       busDTO,
       this.httpOptions
     );
+  }
+
+  buscarBusPorPlaca(nombre: string): Observable<BusDTO[]> {
+    return this.http.get<BusDTO[]>(`${environment.SERVER_URL}/bus/search?nombre=${nombre}`);
   }
 
   recuperarBusPorId(id: number): Observable<BusDTO> {

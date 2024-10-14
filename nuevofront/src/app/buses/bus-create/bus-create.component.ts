@@ -1,26 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BusDTO } from '../../dto/bus-dto'; // Asegúrate de que la ruta sea correcta
 import { BusService } from '../../shared/bus.service'; // Asegúrate de que la ruta sea correcta
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router'; // Importa el servicio Router
+import { Router } from '@angular/router';
+import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
+import { Observable } from 'rxjs';
+import { RutaDTO } from '../../dto/ruta-dto'; // Importa el servicio Router
+import { RutaService } from '../../shared/ruta.service';
 
 @Component({
   selector: 'app-bus-create',
   standalone: true,
-  imports: [FormsModule],
   templateUrl: './bus-create.component.html',
   styleUrls: ['./bus-create.component.css'],
+  imports: [FormsModule, AsyncPipe, NgForOf, NgIf], // Asegúrate de incluir estos módulos aquí
 })
-export class BusCreateComponent {
+export class BusCreateComponent implements OnInit {
   busDTO: BusDTO = new BusDTO(null, '', ''); // Inicializa el modelo del bus
   error: any;
+  allRutas$!: Observable<RutaDTO[]>; // Observable para las rutas
 
   constructor(
     private busService: BusService,  // Inyecta el servicio de bus
-    private router: Router  // Inyecta el router
+    private router: Router,
+    private rutaService: RutaService // Inyecta el servicio de ruta
   ) {}
 
-  crearBus() {
+  ngOnInit(): void {
+    this.cargarRutas();
+  }
+
+  cargarRutas(): void {
+    // Llamada al servicio para obtener rutas y asignarlas al observable
+    this.allRutas$ = this.rutaService.obtenerRutas();
+  }
+
+  crearBus(): void {
     this.busService.crearBus(this.busDTO).subscribe({
       next: (data) => {
         console.log(data);
@@ -33,7 +48,15 @@ export class BusCreateComponent {
     });
   }
 
-  verBuses() {
+  verBuses(): void {
     this.router.navigate(['/buses']); // Navegar a la lista de buses
+  }
+
+  verRuta(id: number | null): void {
+    // Lógica para ver la ruta
+  }
+
+  seleccionarDias(id: number): void {
+    // Lógica para seleccionar días de la ruta
   }
 }

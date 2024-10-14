@@ -4,17 +4,19 @@ import { Router } from '@angular/router';
 import { BusService } from '../../shared/bus.service'; // Asegúrate de que la ruta sea correcta
 import { BusDTO } from '../../dto/bus-dto'; // Asegúrate de que la ruta sea correcta
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-bus-list',
   standalone: true,
-  imports: [NgFor, AsyncPipe, NgIf],
+  imports: [NgFor, AsyncPipe, NgIf, ReactiveFormsModule, FormsModule],
   templateUrl: './bus-list.component.html',
   styleUrls: ['./bus-list.component.css'],
 })
 export class BusListComponent implements OnInit {
   allBuses$!: Observable<BusDTO[]>;
   errorMessage: string = '';
+  nombreBuscado: string = '';
 
   constructor(private busService: BusService, private router: Router) {} // Inyectar Router
 
@@ -55,6 +57,22 @@ export class BusListComponent implements OnInit {
 
   editarBus(id: number): void {
     this.router.navigate(['/buses/editar', id]);
+  }
+
+  // Metodo para buscar bus por placa
+  buscarBus() {
+    if (this.nombreBuscado.trim() !== '') {
+      this.allBuses$ = this.busService.buscarBusPorPlaca(this.nombreBuscado).pipe(
+        catchError(error => {
+          console.error('Hubo un error en la búsqueda', error);
+          this.errorMessage = 'No se encontraron rutas con ese nombre.';
+          return of([]);
+        })
+      );
+    } else {
+      // Si no hay nombre, recargar la lista completa
+      this.allBuses$;
+    }
   }
 
   crearBus(): void {

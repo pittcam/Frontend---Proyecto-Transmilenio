@@ -3,17 +3,21 @@ import { ActivatedRoute, Router } from '@angular/router'; // Importa ActivatedRo
 import { FormsModule } from '@angular/forms';
 import { BusDTO } from '../../dto/bus-dto'; // Asegúrate de que esta ruta sea correcta
 import { BusService } from '../../shared/bus.service';
+import {Observable} from 'rxjs';
+import {RutaDTO} from '../../dto/ruta-dto';
+import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-bus-edit',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, AsyncPipe, NgIf, NgForOf],
   templateUrl: './bus-edit.component.html',
   styleUrls: ['./bus-edit.component.css'],
 })
 export class BusEditComponent implements OnInit {
   busDTO: BusDTO; // Inicializa el busDTO
   error: any;
+  allRutas$!: Observable<RutaDTO[]>; // Observable para las rutas
 
   constructor(
     private busService: BusService,
@@ -49,5 +53,13 @@ export class BusEditComponent implements OnInit {
 
   verBuses() {
     this.router.navigate(['/buses']); // Redirige a la lista de buses
+  }
+
+  verRuta(id: number | null) {
+
+  }
+
+  seleccionarDias(id: number) {
+
   }
 }
