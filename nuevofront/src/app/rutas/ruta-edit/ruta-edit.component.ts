@@ -15,10 +15,11 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./ruta-edit.component.css'],
 })
 export class RutaEditComponent implements OnInit {
-  ruta: RutaDTO = { id: null, nombre: '', estacionesIds: [], horaInicio: 0, horaFinal: 0, dias: [] };
+  ruta: RutaDTO = { id: null, nombre: '', estacionesIds: [], horaInicio: 5, horaFinal: 22, dias: [] };
   estaciones: EstacionDTO[] = [];
   horas: number[] = [];
   diasSemana: string[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+  nombreBuscado: string = '';
 
   error: string = '';
 
@@ -37,9 +38,16 @@ export class RutaEditComponent implements OnInit {
 
   generarHoras(): void {
     const horaInicio = 5;
-    const horaFin = 21;
+    const horaFin = 22;
+
+    // Vaciar la lista de horas por si se llama más de una vez
+    this.horas = [];
+
     for (let hora = horaInicio; hora <= horaFin; hora++) {
-      this.horas.push(hora);
+      const nuevaHora = new Date();
+      nuevaHora.setHours(hora, 0, 0, 0); // Establece la hora, minutos, segundos y milisegundos a 0
+      // @ts-ignore
+      this.horas.push(nuevaHora); // Añadir el objeto Date a la lista
     }
   }
 

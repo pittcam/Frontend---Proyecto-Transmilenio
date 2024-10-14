@@ -20,14 +20,12 @@ import { AsyncPipe, NgIf, CommonModule } from '@angular/common';
 export class RutaViewComponent implements OnInit {
   ruta$!: Observable<RutaDTO | null>;
   estaciones$!: Observable<EstacionDTO[] | null>;
-  horarioSeleccionado!: HorarioDTO | null; // Almacenar el horario seleccionado
   errorMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,
     private rutaService: RutaService,
     private estacionService: EstacionService,
-    private horarioService: HorarioService,
     private router: Router
   ) {}
 

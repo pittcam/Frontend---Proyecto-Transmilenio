@@ -15,6 +15,7 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 export class RutaListComponent implements OnInit {
   allRutas$!: Observable<RutaDTO[]>; // Observable para las rutas
   errorMessage: string = ''; // Mensaje de error
+  nombreBuscado: string = '';
 
   constructor(private rutaService: RutaService, private router: Router) {} // Inyectar Router
 
@@ -28,6 +29,10 @@ export class RutaListComponent implements OnInit {
         })
       );
   }
+
+  buscarRuta(nombreBuscado: string): void {
+
+}
 
   verRuta(id: number | null): void {
     if (id !== null) {
