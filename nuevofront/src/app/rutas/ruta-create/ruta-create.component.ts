@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common'; // Agrega esta importación
   styleUrls: ['./ruta-create.component.css'],
 })
 export class RutaCreateComponent implements OnInit {
-  ruta: RutaDTO = { id: null, nombre: '', estacionesIds: [], horaInicio: 5, horaFinal: 22, dias: [] };
+  ruta: RutaDTO = { id: null, nombre: '', estacionesIds: [], horaInicio: '', horaFin: '', dias: [] };
   estaciones: EstacionDTO[] = [];
   diasSemana: string[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
   horas: Date[] = [];
@@ -76,19 +76,21 @@ export class RutaCreateComponent implements OnInit {
   }
 
   onEstacionChange(event: any): void {
-    const estacionId = +event.target.value; // Convertir el id a número
+    const estacionId = +event.target.value;  // Convertir el valor a número
 
     if (event.target.checked) {
-      // Si el checkbox está marcado, añade el ID a las estaciones seleccionadas
-      this.ruta.estacionesIds.push(estacionId);
-    } else {
-      // Si el checkbox no está marcado, elimina el ID de las estaciones seleccionadas
-      const index = this.ruta.estacionesIds.indexOf(estacionId);
-      if (index > -1) {
-        this.ruta.estacionesIds.splice(index, 1);
+      // Añadir el ID si no está ya presente
+      if (!this.ruta.estacionesIds.includes(estacionId)) {
+        this.ruta.estacionesIds.push(estacionId);
       }
+    } else {
+      // Eliminar el ID si se desmarca
+      this.ruta.estacionesIds = this.ruta.estacionesIds.filter(id => id !== estacionId);
     }
   }
+
+
+
 
   crearRuta(): void {
     this.rutaService.crearRuta(this.ruta).subscribe({

@@ -17,7 +17,7 @@ import { AsyncPipe, NgIf, CommonModule } from '@angular/common';
 })
 export class RutaViewComponent implements OnInit {
   ruta$!: Observable<RutaDTO | null>;
-  estaciones$!: Observable<EstacionDTO[] | null>;
+  estaciones: EstacionDTO[] = [];  // Declaramos la variable aquí
   errorMessage: string = '';
 
   constructor(
@@ -30,6 +30,7 @@ export class RutaViewComponent implements OnInit {
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
+    // Obtener la ruta por ID
     this.ruta$ = this.rutaService.obtenerRuta(id).pipe(
       catchError(error => {
         this.errorMessage = 'Error al cargar los datos de la ruta';
@@ -37,9 +38,15 @@ export class RutaViewComponent implements OnInit {
       })
     );
 
-    // Cargar estaciones
-    this.estaciones$ = this.estacionService.obtenerEstaciones();
-
+    // Cargar todas las estaciones y asignarlas a la variable local
+    this.estacionService.obtenerEstaciones().subscribe({
+      next: (data: EstacionDTO[]) => {
+        this.estaciones = data;
+      },
+      error: (error) => {
+        console.error('Error al cargar estaciones:', error);
+      }
+    });
   }
 
   volver(): void {

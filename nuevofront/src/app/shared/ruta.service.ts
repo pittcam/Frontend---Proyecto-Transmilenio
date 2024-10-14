@@ -42,6 +42,7 @@ export class RutaService {
     return this.http.get<RutaDTO>(`${environment.SERVER_URL}/rutas/${id}`);
   }
 
+
   // Actualizar una ruta existente
   actualizarRuta(id: number, ruta: RutaDTO): Observable<void> {
     return this.http.put<void>(`${environment.SERVER_URL}/rutas/${id}`, ruta, this.httpOptions);

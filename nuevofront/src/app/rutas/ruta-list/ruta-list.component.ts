@@ -38,16 +38,20 @@ export class RutaListComponent implements OnInit {
         catchError(error => {
           console.error('Hubo un error en la búsqueda', error);
           this.errorMessage = 'No se encontraron rutas con ese nombre.';
-          return of([]);
+          return of([]); // Devuelve un arreglo vacío si hay un error
         })
       );
     } else {
-      // Si no hay nombre, recargar la lista completa
-      this.allRutas$;
+      // Si el campo de búsqueda está vacío, carga todas las rutas
+      this.allRutas$ = this.rutaService.obtenerRutas().pipe(
+        catchError(error => {
+          console.error('Hubo un error al cargar las rutas', error);
+          this.errorMessage = 'Hubo un error al cargar las rutas.';
+          return of([]);
+        })
+      );
     }
   }
-
-
 
   verRuta(id: number | null): void {
     if (id !== null) {
