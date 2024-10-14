@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { RutaDTO } from '../dto/ruta-dto';
 import {ConductorDTO} from '../dto/conductor-dto';
+import {BusRutaDiaDTO} from '../dto/bus-ruta-dia-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -61,4 +62,5 @@ export class RutaService {
   obtenerRutasPorBus(busId: number): Observable<RutaDTO[]> {
     return this.http.get<RutaDTO[]>(`${environment.SERVER_URL}/rutas/bus/${busId}`, this.httpOptions);
   }
+
 }
