@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { RutaDTO } from '../../dto/ruta-dto';
 import { RutaService } from '../../shared/ruta.service';
 import { EstacionDTO } from '../../dto/estacion-dto';
-import { HorarioDTO } from '../../dto/horario-dto';
 import { FormsModule } from '@angular/forms';
 import { EstacionService } from '../../shared/estacion.service';
 import { CommonModule } from '@angular/common'; // Agrega esta importación

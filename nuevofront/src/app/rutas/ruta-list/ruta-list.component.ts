@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { RutaService } from '../../shared/ruta.service'; // Asegúrate de que la ruta sea correcta
 import { RutaDTO } from '../../dto/ruta-dto'; // Asegúrate de que la ruta sea correcta
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-ruta-list',
   standalone: true,
-  imports: [NgFor, AsyncPipe, NgIf],
+  imports: [NgFor, AsyncPipe, NgIf, FormsModule],
   templateUrl: './ruta-list.component.html',
   styleUrls: ['./ruta-list.component.css']
 })
@@ -30,9 +31,23 @@ export class RutaListComponent implements OnInit {
       );
   }
 
-  buscarRuta(nombreBuscado: string): void {
+  // Metodo para buscar conductor por nombre
+  buscarRuta() {
+    if (this.nombreBuscado.trim() !== '') {
+      this.allRutas$ = this.rutaService.buscarRutaPorNombre(this.nombreBuscado).pipe(
+        catchError(error => {
+          console.error('Hubo un error en la búsqueda', error);
+          this.errorMessage = 'No se encontraron rutas con ese nombre.';
+          return of([]);
+        })
+      );
+    } else {
+      // Si no hay nombre, recargar la lista completa
+      this.allRutas$;
+    }
+  }
 
-}
+
 
   verRuta(id: number | null): void {
     if (id !== null) {

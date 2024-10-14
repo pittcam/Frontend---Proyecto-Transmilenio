@@ -3,10 +3,8 @@ import { first } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RutaService } from '../../shared/ruta.service';
 import { EstacionService } from '../../shared/estacion.service';
-import { HorarioService } from '../../shared/horario.service';
 import { RutaDTO } from '../../dto/ruta-dto';
 import { EstacionDTO } from '../../dto/estacion-dto';
-import { HorarioDTO } from '../../dto/horario-dto';
 import { catchError, Observable, of } from 'rxjs';
 import { AsyncPipe, NgIf, CommonModule } from '@angular/common';
 

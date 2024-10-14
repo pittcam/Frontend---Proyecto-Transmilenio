@@ -3,12 +3,10 @@ import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
 import {catchError, Observable, of} from 'rxjs';
 import {RutaDTO} from '../../dto/ruta-dto';
 import {EstacionDTO} from '../../dto/estacion-dto';
-import {HorarioDTO} from '../../dto/horario-dto';
 import {ActivatedRoute} from '@angular/router';
 import {RutaService} from '../../shared/ruta.service';
 import {EstacionService} from '../../shared/estacion.service';
 import {RouterLink,Router} from '@angular/router';
-import {HorarioService} from '../../shared/horario.service';
 import {first} from 'rxjs/operators';
 
 @Component({
