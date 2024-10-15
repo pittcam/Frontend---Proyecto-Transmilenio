@@ -7,6 +7,7 @@ import { BusDTO } from '../../dto/bus-dto';
 import { RutaDTO } from '../../dto/ruta-dto';
 import { catchError, of, Observable } from 'rxjs';
 import { AsyncPipe, NgIf, CommonModule } from '@angular/common';
+import {BusRutaDiaService} from '../../shared/bus-ruta-dia.service';
 
 @Component({
   selector: 'app-bus-view',
@@ -25,6 +26,7 @@ export class BusViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private busService: BusService,
+    private busRutaDiaService: BusRutaDiaService,
     private rutaService: RutaService,
     private router: Router
   ) {}
@@ -32,27 +34,55 @@ export class BusViewComponent implements OnInit {
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
+    // Cargar el bus y las rutas asignadas
     this.bus$ = this.busService.recuperarBusPorId(id).pipe(
       catchError((error) => {
         this.errorMessage = 'Error al cargar los datos del bus';
         return of(null);
       })
     );
+
+    // Cargar las rutas asignadas
+    this.cargarRutasAsignadas(id);
   }
 
   cargarRutasAsignadas(busId: number): void {
-    this.rutaService.obtenerRutasPorBus(busId).subscribe(
-      (rutas: RutaDTO[]) => { // Especifica el tipo de rutas
-        this.rutasAsignadas = rutas; // Asigna las rutas a la propiedad
+    this.busService.recuperarBusPorId(busId).subscribe(
+      (bus: BusDTO) => {
+        this.rutasAsignadas = bus.rutas; // Asegúrate de que las rutas están correctamente asignadas al bus
+        console.log('Rutas asignadas:', this.rutasAsignadas);
       },
-      (error: any) => { // Especifica el tipo de error
+      (error) => {
         console.error('Error al cargar las rutas asignadas', error);
       }
     );
   }
 
+
+  seleccionarDias(): void {
+    const busId = this.route.snapshot.paramMap.get('id');
+    this.router.navigate([`/buses/seleccionar-dias/${busId}`]);
+  }
+
   irAAsignarRutas(): void {
     const busId = this.route.snapshot.paramMap.get('id');
-    this.router.navigate([`/asignaciones/asignar-ruta/${busId}`]);
+    this.router.navigate([`asignaciones/asignar-ruta/`,busId]);
+  }
+
+  eliminarRuta(rutaId: number): void {
+    const busId = Number(this.route.snapshot.paramMap.get('id'));  // Obtener el ID del bus
+
+    // Llamar al servicio para eliminar la ruta asignada al bus
+    this.busRutaDiaService.eliminarRuta(busId, rutaId).subscribe({
+      next: () => {
+        console.log(`Ruta con ID ${rutaId} eliminada del bus ${busId}`);
+        // Actualizar la lista de rutas asignadas
+        this.rutasAsignadas = this.rutasAsignadas.filter(ruta => ruta.id !== rutaId);
+      },
+      error: (error) => {
+        console.error('Error al eliminar la ruta:', error);
+        this.errorMessage = 'Error al eliminar la ruta.';
+      }
+    });
   }
 }

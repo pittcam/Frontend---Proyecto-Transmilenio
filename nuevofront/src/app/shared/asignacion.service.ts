@@ -31,6 +31,8 @@ export class AsignacionService {
 
   }
 
+
+
   // Método para asignar una ruta a un bus
   asignarRuta(asignacion: AsignacionDTO): Observable<AsignacionDTO> {
     return this.http.post<AsignacionDTO>(`${this.apiUrl}/rutas`, asignacion, this.httpOptions);

@@ -3,9 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RutaService } from '../../shared/ruta.service';
-import { AsignacionService } from '../../shared/asignacion.service';
-import { AsignacionDTO } from '../../dto/asignacion-dto';
 import { RutaDTO } from '../../dto/ruta-dto';
+import { BusService } from '../../shared/bus.service';
 import { catchError, of } from 'rxjs';
 
 @Component({
@@ -22,50 +21,50 @@ export class AsignacionRutaComponent implements OnInit {
 
   constructor(
     private rutaService: RutaService,
-    private asignacionService: AsignacionService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private busService: BusService
   ) {}
 
   ngOnInit() {
-    this.busId = +this.route.snapshot.paramMap.get('id')!;
-    this.cargarRutasDisponibles();
+    this.busId = +this.route.snapshot.paramMap.get('id')!; // Obtener el ID del bus
+    this.cargarRutasDisponibles(); // Cargar las rutas disponibles
   }
 
+  // Cargar todas las rutas disponibles desde el servicio
   cargarRutasDisponibles() {
-    this.rutaService.obtenerRutas().subscribe((rutas) => {
-      this.rutas = rutas;
-      console.log('Rutas cargadas:', this.rutas);
-    }, error => {
-      console.error('Error al cargar rutas:', error);
-    });
+    this.rutaService.obtenerRutas().subscribe(
+      (rutas) => {
+        this.rutas = rutas;
+        console.log('Rutas cargadas:', this.rutas);
+      },
+      (error) => {
+        console.error('Error al cargar rutas:', error);
+      }
+    );
   }
 
+  // Asignar múltiples rutas a un bus
   asignarRutas() {
-    this.selectedRutaIds.forEach(rutaId => {
-      const asignacion: AsignacionDTO = {
-        busId: this.busId,
-        rutaId: rutaId,
-        conductorId: 1 // Cambia esto a cómo obtienes el conductorId
-      };
-      this.asignacionService.asignarRuta(asignacion).subscribe(() => {
-        alert('Ruta asignada exitosamente.');
-      }, (error) => {
-        console.error('Error al asignar la ruta:', error);
-      });
-    });
-
-    // Redirigir después de la asignación
-    this.router.navigate(['/buses']);
+    // Asignar todas las rutas seleccionadas al bus
+    this.busService.asignarRuta(this.busId, this.selectedRutaIds).subscribe(
+      (bus) => {
+        alert('Rutas asignadas exitosamente.');
+        this.router.navigate(['/buses/ver/', this.busId]); // Redirigir después de la asignación
+      },
+      (error) => {
+        console.error('Error al asignar las rutas:', error);
+      }
+    );
   }
 
+
+  // Método para gestionar los cambios en los checkboxes
   onRutaChange(event: any, rutaId: number): void {
     if (event.target.checked) {
-      // Si el checkbox está marcado, añadir el ID a las selecciones
-      this.selectedRutaIds.push(rutaId);
+      this.selectedRutaIds.push(rutaId); // Añadir el ID si está seleccionado
     } else {
-      // Si el checkbox no está marcado, eliminar el ID de las selecciones
-      this.selectedRutaIds = this.selectedRutaIds.filter(id => id !== rutaId);
+      this.selectedRutaIds = this.selectedRutaIds.filter(id => id !== rutaId); // Eliminar si está deseleccionado
     }
   }
 }

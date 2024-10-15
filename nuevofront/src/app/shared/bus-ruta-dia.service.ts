@@ -21,4 +21,16 @@ export class BusRutaDiaService {
   guardarDias(busRutaDia: BusRutaDiaDTO): Observable<any> {
     return this.http.post<any>(`${environment.SERVER_URL}/guardar-dias`, busRutaDia);
   }
+
+  // Metodo para eliminar una ruta asignada a un bus
+  eliminarRuta(busId: number, rutaId: number): Observable<any> {
+    return this.http.delete(`${environment.SERVER_URL}/bus-ruta-dia/eliminar`, {
+      params: {
+        busId: busId.toString(),
+        rutaId: rutaId.toString(),
+      },
+      ...this.httpOptions
+    });
+  }
+
 }

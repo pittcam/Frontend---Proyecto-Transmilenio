@@ -16,12 +16,18 @@
       <tr>
         <th>ID</th>
         <th>Nombre</th>
+        <th>Acciones</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let ruta of bus.rutas">
         <td>{{ ruta.id }}</td>
         <td>{{ ruta.nombre }}</td>
+        <td>
+          <button (click)="seleccionarDias()" class="btn btn-view">Seleccionar días</button>
+          <button *ngIf="ruta.id !== null" (click)="eliminarRuta(ruta.id!)" class="btn btn-eliminar">Eliminar</button>
+
+        </td>
       </tr>
       </tbody>
     </table>

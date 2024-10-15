@@ -1,37 +1,36 @@
-import {Component, OnInit} from '@angular/core';
-import {catchError, Observable, of} from 'rxjs';
-import {RutaDTO} from '../../dto/ruta-dto';
-import {EstacionDTO} from '../../dto/estacion-dto';
-import {ActivatedRoute, Router} from '@angular/router';
-import {RutaService} from '../../shared/ruta.service';
-import {EstacionService} from '../../shared/estacion.service';
+import { Component, OnInit } from '@angular/core';
+import { catchError, Observable, of } from 'rxjs';
+import { RutaDTO } from '../../dto/ruta-dto';
+import { EstacionDTO } from '../../dto/estacion-dto';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RutaService } from '../../shared/ruta.service';
+import { EstacionService } from '../../shared/estacion.service';
+import { BusRutaDiaDTO } from '../../dto/bus-ruta-dia-dto';
+import { BusDTO } from '../../dto/bus-dto';
+import { BusRutaDiaService } from '../../shared/bus-ruta-dia.service';
+import {FormsModule} from '@angular/forms';
 import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {BusRutaDiaDTO} from '../../dto/bus-ruta-dia-dto';
-import {BusDTO} from '../../dto/bus-dto';
-import {RouterLink} from '@angular/router';
-import {BusRutaDiaService} from '../../shared/bus-ruta-dia.service';
 
 @Component({
   selector: 'app-seleccionar-dias',
   standalone: true,
+  templateUrl: './seleccionar-dias.component.html',
+  styleUrls: ['./seleccionar-dias.component.css'],
   imports: [
-    AsyncPipe,
+    FormsModule,
     NgIf,
     NgForOf,
-    FormsModule,
-    ReactiveFormsModule,RouterLink
-  ],
-  templateUrl: './seleccionar-dias.component.html',
-  styleUrl: './seleccionar-dias.component.css'
+    AsyncPipe
+  ]
 })
 export class SeleccionarDiasComponent implements OnInit {
   ruta: RutaDTO = { id: null, nombre: '', estacionesIds: [], horaInicio: '', horaFin: '', dias: [] };
   ruta$!: Observable<RutaDTO | null>;
-  estaciones: EstacionDTO[] = [];  // Declaramos la variable aquí
+  estaciones: EstacionDTO[] = [];
   errorMessage: string = '';
   diasSemana: string[] = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
-  busRutaDia: BusRutaDiaDTO = new BusRutaDiaDTO(new BusDTO(null, '', ''), this.ruta, []); // Inicializa con un bus vacío y la ruta actual
+  busRutaDia: BusRutaDiaDTO = new BusRutaDiaDTO(new BusDTO(null, '', ''), this.ruta, []);
+  busId!: number; // Variable para almacenar el ID del bus
 
   constructor(
     private route: ActivatedRoute,
@@ -43,6 +42,7 @@ export class SeleccionarDiasComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.busId = id; // Guardar el ID del bus
 
     // Obtener la ruta por ID
     this.ruta$ = this.rutaService.obtenerRuta(id).pipe(
@@ -63,36 +63,33 @@ export class SeleccionarDiasComponent implements OnInit {
     });
   }
 
-  // Metodo para volver al componente anterior
+  // Método para volver a la vista del bus
   volver(): void {
-    this.router.navigate(['/buses/crear']);
+    this.router.navigate([`/buses/ver/${this.busId}`]); // Redirigir al componente de detalles del bus con su ID
   }
 
   // Capturar cambios en los días seleccionados
   onDiaChange(event: any): void {
     const dia = event.target.value;
     if (event.target.checked) {
-      // Añadir el día a la lista si está seleccionado
-      this.busRutaDia.dias.push(dia);
+      this.busRutaDia.dias.push(dia); // Añadir el día a la lista si está seleccionado
     } else {
-      // Eliminar el día si se deselecciona
       const index = this.busRutaDia.dias.indexOf(dia);
       if (index > -1) {
-        this.busRutaDia.dias.splice(index, 1);
+        this.busRutaDia.dias.splice(index, 1); // Eliminar el día si se deselecciona
       }
     }
   }
 
-  // Guardar los días seleccionados
+  // Guardar los días seleccionados y redirigir al componente de detalles del bus
   guardarDias(): void {
-    // Asignar la ruta seleccionada al DTO (esto ya debería estar en la ruta actual)
-    this.busRutaDia.ruta = this.ruta;
+    this.busRutaDia.ruta = this.ruta; // Asignar la ruta seleccionada al DTO
 
-    // Aquí llamarías a un servicio que maneje la lógica de guardar la relación entre bus, ruta y días
+    // Llamar al servicio para guardar la relación entre bus, ruta y días
     this.busRutaDiaService.guardarDias(this.busRutaDia).subscribe({
       next: (response) => {
         console.log('Días guardados exitosamente:', response);
-        this.router.navigate(['/buses/crear']); // Volver al listado de rutas después de guardar
+        this.router.navigate([`/buses/ver/${this.busId}`]); // Redirigir a la vista del bus después de guardar
       },
       error: (error) => {
         console.error('Error al guardar los días:', error);

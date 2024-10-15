@@ -49,9 +49,9 @@ export class BusService {
     return this.http.get<BusDTO[]>(`${environment.SERVER_URL}/bus/disponibles`); // Asegúrate que esta ruta sea correcta
   }
 
-  // Método para asignar una ruta a un bus
-  asignarRutaAlBus(busId: number, rutaId: number): Observable<void> {
-    const asignacion = { busId, rutaId }; // Crear objeto de asignación
-    return this.http.post<void>(`${environment.SERVER_URL}/bus/asignarRuta`, asignacion, this.httpOptions);
+  // Metodo para asignar múltiples rutas a un bus
+  asignarRuta(busId: number, rutaIds: number[]): Observable<BusDTO> {
+    return this.http.post<BusDTO>(`${environment.SERVER_URL}/bus/${busId}/asignarRutas`, rutaIds, this.httpOptions);
   }
+
 }

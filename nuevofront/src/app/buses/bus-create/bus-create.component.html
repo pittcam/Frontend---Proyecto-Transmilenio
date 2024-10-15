@@ -12,6 +12,18 @@
       <input type="text" id="numeroPlaca" [(ngModel)]="busDTO.placa" name="numeroPlaca" required>
     </div> <!-- Cierre del div que faltaba -->
 
+    <ul>
+      <li *ngFor="let ruta of rutas">
+        <label>
+          <input
+            type="checkbox"
+            (change)="onRutaChange($event, ruta.id ?? -1)"
+            [checked]="selectedRutaIds.includes(ruta.id ?? -1)" />
+          {{ ruta.nombre }} <!-- Muestra el nombre de la ruta -->
+        </label>
+      </li>
+    </ul>
+
 
     <div class="form-buttons">
       <button type="submit" class="btn btn-create">Crear Bus</button>
