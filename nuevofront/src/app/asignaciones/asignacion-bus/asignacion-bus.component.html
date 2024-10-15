@@ -1,14 +1,12 @@
 <div class="asignar-bus-container">
-  <h2>Asignar Bus al Conductor</h2>
+  <h2>Asignar Bus-Ruta-Día al Conductor</h2>
 
   <form (ngSubmit)="asignarBus()" class="bus-assignment-form">
-    <!-- Selección de Bus -->
     <div class="form-group">
-      <label for="bus">Seleccionar Bus:</label>
-      <select id="bus" [(ngModel)]="selectedBusId" name="bus" required>
-        <option value="" disabled>Seleccione un bus</option>
-        <option *ngFor="let bus of buses" [value]="bus.id">
-          {{ bus.modelo }} - {{ bus.numeroPlaca }}
+      <label for="bus">Seleccionar Bus-Ruta-Día:</label>
+      <select id="bus" [(ngModel)]="selectedBusRutaDia" name="bus" required>
+        <option *ngFor="let busRutaDia of busesRutaDia" [ngValue]="busRutaDia">
+          {{ busRutaDia.bus.modelo }} - {{ busRutaDia.ruta.nombre }} ({{ busRutaDia.dias.join(', ') }})
         </option>
       </select>
     </div>
