@@ -50,8 +50,9 @@ export class RutaService {
   }
 
   buscarRutaPorNombre(nombre: string): Observable<RutaDTO[]> {
-    return this.http.get<RutaDTO[]>(`${environment.SERVER_URL}/ruta/search?nombre=${nombre}`);
+    return this.http.get<RutaDTO[]>(`${environment.SERVER_URL}/rutas/search?nombre=${nombre}`);
   }
+
 
   // Obtener rutas disponibles (modificación redundante)
   getRutasDisponibles(): Observable<RutaDTO[]> {

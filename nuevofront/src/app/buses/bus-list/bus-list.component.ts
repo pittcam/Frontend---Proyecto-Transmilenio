@@ -16,7 +16,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 export class BusListComponent implements OnInit {
   allBuses$!: Observable<BusDTO[]>;
   errorMessage: string = '';
-  nombreBuscado: string = '';
+  placaBuscada: string = '';
 
   constructor(private busService: BusService, private router: Router) {} // Inyectar Router
 
@@ -61,8 +61,8 @@ export class BusListComponent implements OnInit {
 
   // Metodo para buscar bus por placa
   buscarBus() {
-    if (this.nombreBuscado.trim() !== '') {
-      this.allBuses$ = this.busService.buscarBusPorPlaca(this.nombreBuscado).pipe(
+    if (this.placaBuscada.trim() !== '') {
+      this.allBuses$ = this.busService.buscarBusPorPlaca(this.placaBuscada).pipe(
         catchError(error => {
           console.error('Hubo un error en la búsqueda', error);
           this.errorMessage = 'No se encontraron rutas con ese nombre.';

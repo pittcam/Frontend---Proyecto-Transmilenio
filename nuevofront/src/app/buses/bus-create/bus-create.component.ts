@@ -15,7 +15,7 @@ import { RutaService } from '../../shared/ruta.service';
   styleUrls: ['./bus-create.component.css'],
   imports: [FormsModule, AsyncPipe, NgForOf, NgIf],
 })
-export class BusCreateComponent implements OnInit {
+export class BusCreateComponent {
   busDTO: BusDTO = new BusDTO(null, '', '', []); // Inicializa el modelo del bus con un array vacío para rutas
   error: any;
   rutas: RutaDTO[] = []; // Almacena las rutas disponibles
@@ -27,9 +27,7 @@ export class BusCreateComponent implements OnInit {
     private rutaService: RutaService
   ) {}
 
-  ngOnInit() {
-    this.cargarRutasDisponibles();
-  }
+
 
   // Metodo para crear el bus
   crearBus(): void {
@@ -49,29 +47,6 @@ export class BusCreateComponent implements OnInit {
     });
   }
 
-  // Cargar las rutas disponibles desde el servicio
-  cargarRutasDisponibles() {
-    this.rutaService.obtenerRutas().subscribe({
-      next: (rutas) => {
-        this.rutas = rutas;
-        console.log('Rutas cargadas:', this.rutas);
-      },
-      error: (error) => {
-        console.error('Error al cargar rutas:', error);
-      }
-    });
-  }
-
-  // Metodo para gestionar los cambios en los checkboxes de las rutas
-  onRutaChange(event: any, rutaId: number): void {
-    if (event.target.checked) {
-      // Si el checkbox está marcado, añadir el ID a las selecciones
-      this.selectedRutaIds.push(rutaId);
-    } else {
-      // Si el checkbox no está marcado, eliminar el ID de las selecciones
-      this.selectedRutaIds = this.selectedRutaIds.filter(id => id !== rutaId);
-    }
-  }
 
   // Método para navegar a la lista de buses
   verBuses(): void {

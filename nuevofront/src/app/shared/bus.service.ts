@@ -30,9 +30,10 @@ export class BusService {
     );
   }
 
-  buscarBusPorPlaca(nombre: string): Observable<BusDTO[]> {
-    return this.http.get<BusDTO[]>(`${environment.SERVER_URL}/bus/search?nombre=${nombre}`);
+  buscarBusPorPlaca(placa: string): Observable<BusDTO[]> {
+    return this.http.get<BusDTO[]>(`${environment.SERVER_URL}/bus/search?placa=${placa}`);
   }
+
 
   recuperarBusPorId(id: number): Observable<BusDTO> {
     return this.http.get<BusDTO>(`${environment.SERVER_URL}/bus/${id}`);
