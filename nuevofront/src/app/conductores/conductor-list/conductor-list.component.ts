@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
-import { Router } from '@angular/router'; // Importar Router
+import {Router, RouterLink} from '@angular/router'; // Importar Router
 import { ConductorService } from '../../shared/conductor.service';
 import { ConductorDTO } from '../../dto/conductor-dto';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
@@ -9,7 +9,7 @@ import {FormsModule} from '@angular/forms';
 @Component({
   selector: 'app-conductor-list',
   standalone: true,
-  imports: [NgFor, AsyncPipe, NgIf, FormsModule],
+    imports: [NgFor, AsyncPipe, NgIf, FormsModule, RouterLink],
   templateUrl: './conductor-list.component.html',
   styleUrls: ['./conductor-list.component.css'],
 })

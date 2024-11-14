@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { BusService } from '../../shared/bus.service'; // Asegúrate de que la ruta sea correcta
 import { BusDTO } from '../../dto/bus-dto'; // Asegúrate de que la ruta sea correcta
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
@@ -9,7 +9,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 @Component({
   selector: 'app-bus-list',
   standalone: true,
-  imports: [NgFor, AsyncPipe, NgIf, ReactiveFormsModule, FormsModule],
+    imports: [NgFor, AsyncPipe, NgIf, ReactiveFormsModule, FormsModule, RouterLink],
   templateUrl: './bus-list.component.html',
   styleUrls: ['./bus-list.component.css'],
 })

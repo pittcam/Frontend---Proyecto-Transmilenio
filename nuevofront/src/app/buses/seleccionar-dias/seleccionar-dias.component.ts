@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 import { RutaDTO } from '../../dto/ruta-dto';
 import { EstacionDTO } from '../../dto/estacion-dto';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { RutaService } from '../../shared/ruta.service';
 import { EstacionService } from '../../shared/estacion.service';
 import { BusRutaDiaDTO } from '../../dto/bus-ruta-dia-dto';
@@ -16,12 +16,13 @@ import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
   standalone: true,
   templateUrl: './seleccionar-dias.component.html',
   styleUrls: ['./seleccionar-dias.component.css'],
-  imports: [
-    FormsModule,
-    NgIf,
-    NgForOf,
-    AsyncPipe
-  ]
+    imports: [
+        FormsModule,
+        NgIf,
+        NgForOf,
+        AsyncPipe,
+        RouterLink
+    ]
 })
 export class SeleccionarDiasComponent implements OnInit {
   ruta: RutaDTO = { id: null, nombre: '', estacionesIds: [], horaInicio: '', horaFin: '', dias: [] };

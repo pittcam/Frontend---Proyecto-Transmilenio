@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BusDTO } from '../../dto/bus-dto';
 import { BusService } from '../../shared/bus.service';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
 import { Observable } from 'rxjs';
 import { RutaDTO } from '../../dto/ruta-dto';
@@ -13,7 +13,7 @@ import { RutaService } from '../../shared/ruta.service';
   standalone: true,
   templateUrl: './bus-create.component.html',
   styleUrls: ['./bus-create.component.css'],
-  imports: [FormsModule, AsyncPipe, NgForOf, NgIf],
+    imports: [FormsModule, AsyncPipe, NgForOf, NgIf, RouterLink],
 })
 export class BusCreateComponent {
   busDTO: BusDTO = new BusDTO(null, '', '', []); // Inicializa el modelo del bus con un array vacío para rutas

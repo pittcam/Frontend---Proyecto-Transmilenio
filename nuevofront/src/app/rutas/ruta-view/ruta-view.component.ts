@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { RutaService } from '../../shared/ruta.service';
 import { EstacionService } from '../../shared/estacion.service';
 import { RutaDTO } from '../../dto/ruta-dto';
@@ -11,7 +11,7 @@ import { AsyncPipe, NgIf, CommonModule } from '@angular/common';
 @Component({
   selector: 'app-ruta-view',
   standalone: true,
-  imports: [CommonModule, NgIf, AsyncPipe],
+    imports: [CommonModule, NgIf, AsyncPipe, RouterLink],
   templateUrl: './ruta-view.component.html',
   styleUrls: ['./ruta-view.component.css'],
 })

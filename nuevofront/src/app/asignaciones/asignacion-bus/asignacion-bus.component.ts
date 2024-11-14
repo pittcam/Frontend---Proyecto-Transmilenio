@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { BusService } from '../../shared/bus.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -10,7 +10,7 @@ import {BusRutaDiaService} from '../../shared/bus-ruta-dia.service'; // Usamos B
 @Component({
   selector: 'app-asignacion-bus',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+    imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './asignacion-bus.component.html',
   styleUrls: ['./asignacion-bus.component.css'],
 })

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { RutaService } from '../../shared/ruta.service'; // Asegúrate de que la ruta sea correcta
 import { RutaDTO } from '../../dto/ruta-dto'; // Asegúrate de que la ruta sea correcta
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
@@ -9,7 +9,7 @@ import {FormsModule} from '@angular/forms';
 @Component({
   selector: 'app-ruta-list',
   standalone: true,
-  imports: [NgFor, AsyncPipe, NgIf, FormsModule],
+    imports: [NgFor, AsyncPipe, NgIf, FormsModule, RouterLink],
   templateUrl: './ruta-list.component.html',
   styleUrls: ['./ruta-list.component.css']
 })

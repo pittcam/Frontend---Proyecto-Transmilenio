@@ -1,6 +1,6 @@
 // Importaciones necesarias
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { BusService } from '../../shared/bus.service';
 import { RutaService } from '../../shared/ruta.service';
 import { BusDTO } from '../../dto/bus-dto';
@@ -12,7 +12,7 @@ import {BusRutaDiaService} from '../../shared/bus-ruta-dia.service';
 @Component({
   selector: 'app-bus-view',
   standalone: true,
-  imports: [NgIf, AsyncPipe, CommonModule],
+    imports: [NgIf, AsyncPipe, CommonModule, RouterLink],
   templateUrl: './bus-view.component.html',
   styleUrls: ['./bus-view.component.css'],
 })

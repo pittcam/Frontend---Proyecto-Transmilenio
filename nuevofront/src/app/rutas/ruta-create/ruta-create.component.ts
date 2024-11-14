@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { RutaDTO } from '../../dto/ruta-dto';
 import { RutaService } from '../../shared/ruta.service';
 import { EstacionDTO } from '../../dto/estacion-dto';
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common'; // Agrega esta importación
 @Component({
   selector: 'app-ruta-create',
   standalone: true,
-  imports: [FormsModule, CommonModule], // Asegúrate de incluir CommonModule aquí
+    imports: [FormsModule, CommonModule, RouterLink], // Asegúrate de incluir CommonModule aquí
   templateUrl: './ruta-create.component.html',
   styleUrls: ['./ruta-create.component.css'],
 })

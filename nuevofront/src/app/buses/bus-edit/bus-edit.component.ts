@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router'; // Importa ActivatedRoute para obtener parámetros de la ruta
+import {ActivatedRoute, Router, RouterLink} from '@angular/router'; // Importa ActivatedRoute para obtener parámetros de la ruta
 import { FormsModule } from '@angular/forms';
 import { BusDTO } from '../../dto/bus-dto'; // Asegúrate de que esta ruta sea correcta
 import { BusService } from '../../shared/bus.service';
@@ -10,7 +10,7 @@ import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
 @Component({
   selector: 'app-bus-edit',
   standalone: true,
-  imports: [FormsModule, AsyncPipe, NgIf, NgForOf],
+    imports: [FormsModule, AsyncPipe, NgIf, NgForOf, RouterLink],
   templateUrl: './bus-edit.component.html',
   styleUrls: ['./bus-edit.component.css'],
 })

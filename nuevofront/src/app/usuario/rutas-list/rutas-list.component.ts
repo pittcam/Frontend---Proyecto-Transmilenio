@@ -4,7 +4,7 @@ import {FormsModule} from "@angular/forms";
 import {catchError, Observable, of} from 'rxjs';
 import {RutaDTO} from '../../dto/ruta-dto';
 import {RutaService} from '../../shared/ruta.service';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-rutas-view',
@@ -13,7 +13,8 @@ import {Router} from '@angular/router';
         AsyncPipe,
         FormsModule,
         NgForOf,
-        NgIf
+        NgIf,
+        RouterLink
     ],
   templateUrl: './rutas-list.component.html',
   styleUrl: './rutas-list.component.css'

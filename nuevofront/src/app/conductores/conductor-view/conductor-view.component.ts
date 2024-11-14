@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { ConductorService } from '../../shared/conductor.service';
 import { AsignacionService } from '../../shared/asignacion.service';
 import { ConductorDTO } from '../../dto/conductor-dto';
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common'; // Importar CommonModule
 @Component({
   selector: 'app-conductor-view',
   standalone: true,
-  imports: [CommonModule], // Asegúrate de incluirlo aquí
+  imports: [CommonModule, RouterLink], // Asegúrate de incluirlo aquí
   templateUrl: './conductor-view.component.html',
   styleUrls: ['./conductor-view.component.css'],
 })

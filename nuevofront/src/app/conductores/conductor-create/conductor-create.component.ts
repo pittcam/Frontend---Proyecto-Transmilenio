@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { ConductorDTO } from '../../dto/conductor-dto'; // Asegúrate de que la ruta sea correcta
 import { ConductorService } from '../../shared/conductor.service'; // Asegúrate de que la ruta sea correcta
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router'; // Importa el servicio Router
+import {Router, RouterLink} from '@angular/router'; // Importa el servicio Router
 
 @Component({
   selector: 'app-conductor-create',
   standalone: true,
-  imports: [FormsModule],
+    imports: [FormsModule, RouterLink],
   templateUrl: './conductor-create.component.html',
   styleUrls: ['./conductor-create.component.css'],
 })

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router'; // Importa ActivatedRoute para obtener parámetros de la ruta
+import {ActivatedRoute, Router, RouterLink} from '@angular/router'; // Importa ActivatedRoute para obtener parámetros de la ruta
 import { FormsModule } from '@angular/forms';
 import { ConductorDTO } from '../../dto/conductor-dto';
 import { ConductorService } from '../../shared/conductor.service';
@@ -7,7 +7,7 @@ import { ConductorService } from '../../shared/conductor.service';
 @Component({
   selector: 'app-conductor-edit',
   standalone: true,
-  imports: [FormsModule],
+    imports: [FormsModule, RouterLink],
   templateUrl: './conductor-edit.component.html',
   styleUrls: ['./conductor-edit.component.css'],
 })

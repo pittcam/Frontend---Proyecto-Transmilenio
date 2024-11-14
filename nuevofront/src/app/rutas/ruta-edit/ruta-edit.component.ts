@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import {Router, ActivatedRoute, RouterLink} from '@angular/router';
 import { RutaDTO } from '../../dto/ruta-dto';
 import { RutaService } from '../../shared/ruta.service';
 import { EstacionDTO } from '../../dto/estacion-dto';
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-ruta-edit',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+    imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './ruta-edit.component.html',
   styleUrls: ['./ruta-edit.component.css'],
 })

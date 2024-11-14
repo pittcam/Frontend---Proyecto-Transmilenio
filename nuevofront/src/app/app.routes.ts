@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { LoginComponent} from './componentes/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ConductorCreateComponent } from './conductores/conductor-create/conductor-create.component';
 import { ConductorListComponent } from './conductores/conductor-list/conductor-list.component';
@@ -20,6 +21,7 @@ import { SeleccionarDiasComponent} from './buses/seleccionar-dias/seleccionar-di
 
 
 export const routes: Routes = [
+  { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent }, // Ruta para el dashboard
   { path: 'crear-conductor', component: ConductorCreateComponent }, // Ruta para crear conductor
   { path: 'conductores', component: ConductorListComponent }, // Ruta para listar conductores
@@ -38,5 +40,5 @@ export const routes: Routes = [
   { path: 'asignaciones/asignar-bus/:conductorId', component: AsignacionBusComponent},
   { path: 'asignaciones/asignar-ruta/:id', component: AsignacionRutaComponent },
   { path: 'buses/seleccionar-dias/:id', component: SeleccionarDiasComponent},
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' } // Redirección al dashboard
+  { path: '', redirectTo: '/login', pathMatch: 'full' } // Redirección al login
 ];

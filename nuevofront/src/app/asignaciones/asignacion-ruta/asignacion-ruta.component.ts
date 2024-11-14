@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RutaService } from '../../shared/ruta.service';
@@ -10,7 +10,7 @@ import { catchError, of } from 'rxjs';
 @Component({
   selector: 'app-asignacion-ruta',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+    imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './asignacion-ruta.component.html',
   styleUrls: ['./asignacion-ruta.component.css'],
 })
