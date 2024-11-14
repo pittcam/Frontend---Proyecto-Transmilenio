@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="form-container">
+    <form (ngSubmit)="onSend()" #form="ngForm">
+      <h2>Formulario registro usuario</h2>
+      <div class="input-group">
+        <p>Ingrese el nombre: </p>
+        <input type="text" id ="nombre" name="nombre" [(ngModel)]="nombre" required>
+      </div>
+
+      <div class="input-group">
+        <p>Ingrese la cédula: </p>
+        <input type="text" name="cedula" [(ngModel)]="cedula">
+      </div>
+      <div class="input-group">
+        <p>Ingrese el correo: </p>
+        <input type="text" name="correo" [(ngModel)]="correo" required>
+      </div>
+      <div class="input-group">
+        <p>Ingrese el nombre de usuario: </p>
+        <input type="text" name="usuario" [(ngModel)]="usuario" required>
+      </div>
+      <div class="input-group">
+        <p>Ingrese una contraseña (mínimo 8 caractéres): </p>
+        <input type="password" name="contrasena" [(ngModel)]="contrasena" required>
+      </div>
+
+      <button type="submit" [disabled]="!form.valid">Enviar</button>
+
+      <p class="volver-link"> <a [routerLink]="['/login']">Volver</a></p>
+    </form>
+  </div>
+</div>
