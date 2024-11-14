@@ -18,27 +18,125 @@ import { AsignacionRutaComponent } from './asignaciones/asignacion-ruta/asignaci
 import { RutasListComponent} from './usuario/rutas-list/rutas-list.component';
 import { RutasViewComponent} from './usuario/rutas-view/rutas-view.component';
 import { SeleccionarDiasComponent} from './buses/seleccionar-dias/seleccionar-dias.component';
+import {RegistrarseComponent} from './componentes/registrarse/registrarse.component';
+import {Role} from './dto/role';
+import {roleGuard} from './guards/role.guard';
+import {authGuard} from './guards/auth.guard';
 
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent }, // Ruta para el dashboard
-  { path: 'crear-conductor', component: ConductorCreateComponent }, // Ruta para crear conductor
-  { path: 'conductores', component: ConductorListComponent }, // Ruta para listar conductores
-  { path: 'conductores/editar/:id', component: ConductorEditComponent },
-  { path: 'conductores/ver/:id', component: ConductorViewComponent }, // Ruta para ver un conductor
-  { path: 'buses/crear', component: BusCreateComponent },
-  { path: 'buses/ver/:id', component: BusViewComponent },
-  { path: 'buses/editar/:id', component: BusEditComponent },
-  { path: 'buses', component: BusListComponent },
-  { path: 'rutas/crear', component: RutaCreateComponent },
-  { path: 'rutas/ver/:id', component: RutaViewComponent },
-  { path: 'rutas/editar/:id', component: RutaEditComponent },
-  { path: 'rutas', component: RutaListComponent },
-  { path: 'usuario', component: RutasListComponent},
-  { path: 'consulta/:id', component: RutasViewComponent},
-  { path: 'asignaciones/asignar-bus/:conductorId', component: AsignacionBusComponent},
-  { path: 'asignaciones/asignar-ruta/:id', component: AsignacionRutaComponent },
-  { path: 'buses/seleccionar-dias/:id', component: SeleccionarDiasComponent},
+  { path: 'login',
+    component: LoginComponent
+  },
+
+  { path: 'registrarse',
+    component: RegistrarseComponent
+  },
+
+  { path: 'dashboard',
+    component: DashboardComponent
+  }, // Ruta para el dashboard
+  { path: 'crear-conductor',
+    component: ConductorCreateComponent,
+    canActivate: [authGuard, roleGuard],
+    data: { roles: [Role.Admin] }
+  },
+
+  { path: 'conductores',
+    component: ConductorListComponent,
+    canActivate: [authGuard, roleGuard],
+    data: { roles: [Role.Admin] }
+  },
+
+  { path: 'conductores/editar/:id',
+    component: ConductorEditComponent,
+    canActivate: [authGuard, roleGuard],
+    data: { roles: [Role.Admin] } },
+
+  { path: 'conductores/ver/:id',
+    component: ConductorViewComponent,
+    canActivate: [authGuard, roleGuard],
+    data: { roles: [Role.Admin] }
+  },
+
+  { path: 'buses/crear',
+    component: BusCreateComponent,
+    canActivate: [authGuard, roleGuard],
+    data: { roles: [Role.Admin] }
+  },
+
+  { path: 'buses/ver/:id',
+    component: BusViewComponent,
+    canActivate: [authGuard, roleGuard],
+    data: { roles: [Role.Admin] }
+  },
+
+  { path: 'buses/editar/:id',
+    component: BusEditComponent ,
+    canActivate: [authGuard, roleGuard],
+    data: { roles: [Role.Admin] }
+  },
+
+  { path: 'buses',
+    component: BusListComponent ,
+    canActivate: [authGuard, roleGuard],
+    data: { roles: [Role.Admin] }
+  },
+
+  { path: 'rutas/crear',
+    component: RutaCreateComponent,
+    canActivate: [authGuard, roleGuard],
+    data: { roles: [Role.Coordinador] }
+  },
+
+  { path: 'rutas/ver/:id',
+    component: RutaViewComponent ,
+    canActivate: [authGuard, roleGuard],
+    data: { roles: [Role.Coordinador, Role.User] }
+  },
+
+  { path: 'rutas/editar/:id',
+    component: RutaEditComponent ,
+    canActivate: [authGuard, roleGuard],
+    data: { roles: [Role.Coordinador] }
+  },
+
+  { path: 'rutas',
+    component: RutaListComponent ,
+    canActivate: [authGuard, roleGuard],
+    data: { roles: [Role.Coordinador] }
+  },
+
+  { path: 'usuario',
+    component: RutasListComponent,
+    canActivate: [authGuard, roleGuard],
+    data: { roles: [Role.User] }
+  },
+
+  { path: 'consulta/:id',
+    component: RutasViewComponent,
+    canActivate: [authGuard, roleGuard],
+    data: { roles: [Role.User] }
+  },
+
+  { path: 'asignaciones/asignar-bus/:conductorId',
+    component: AsignacionBusComponent,
+    canActivate: [authGuard, roleGuard],
+    data: { roles: [Role.Admin] }
+  },
+
+  { path: 'asignaciones/asignar-ruta/:id',
+    component: AsignacionRutaComponent
+    ,
+    canActivate: [authGuard, roleGuard],
+    data: { roles: [Role.Admin] }
+  },
+
+  { path: 'buses/seleccionar-dias/:id',
+    component: SeleccionarDiasComponent,
+    canActivate: [authGuard, roleGuard],
+    data: { roles: [Role.Admin] }
+  },
+
   { path: '', redirectTo: '/login', pathMatch: 'full' } // Redirección al login
 ];

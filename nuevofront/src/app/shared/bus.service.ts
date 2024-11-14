@@ -3,40 +3,44 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { BusDTO } from '../dto/bus-dto';
-import {RutaDTO} from '../dto/ruta-dto';
-import {BusRutaDiaDTO} from '../dto/bus-ruta-dia-dto'; // Asegúrate de que esta ruta sea correcta
+import { AuthService } from './auth.service';
 
 @Injectable({
-  providedIn: 'root', // Asegúrate de que el servicio esté disponible en toda la aplicación
+  providedIn: 'root'
 })
 export class BusService {
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      Authorization: ''
     }),
   };
 
-  constructor(private http: HttpClient) {}
-
-  listarBuses(): Observable<BusDTO[]> {
-    return this.http.get<BusDTO[]>(`${environment.SERVER_URL}/bus`);
+  constructor(private http: HttpClient, private authService: AuthService) {
+    this.setAuthorizationHeader();
   }
 
-  crearBus(busDTO: BusDTO): Observable<BusDTO> {
-    return this.http.post<BusDTO>(
-      `${environment.SERVER_URL}/bus`,
-      busDTO,
-      this.httpOptions
+  private setAuthorizationHeader() {
+    const token = this.authService.getToken();
+    this.httpOptions.headers = this.httpOptions.headers.set(
+      'Authorization', `Bearer ${token}`
     );
   }
 
-  buscarBusPorPlaca(placa: string): Observable<BusDTO[]> {
-    return this.http.get<BusDTO[]>(`${environment.SERVER_URL}/bus/search?placa=${placa}`);
+  listarBuses(): Observable<BusDTO[]> {
+    return this.http.get<BusDTO[]>(`${environment.SERVER_URL}/bus`, this.httpOptions);
   }
 
+  crearBus(busDTO: BusDTO): Observable<BusDTO> {
+    return this.http.post<BusDTO>(`${environment.SERVER_URL}/bus`, busDTO, this.httpOptions);
+  }
+
+  buscarBusPorPlaca(placa: string): Observable<BusDTO[]> {
+    return this.http.get<BusDTO[]>(`${environment.SERVER_URL}/bus/search?placa=${placa}`, this.httpOptions);
+  }
 
   recuperarBusPorId(id: number): Observable<BusDTO> {
-    return this.http.get<BusDTO>(`${environment.SERVER_URL}/bus/${id}`);
+    return this.http.get<BusDTO>(`${environment.SERVER_URL}/bus/${id}`, this.httpOptions);
   }
 
   actualizarBus(bus: BusDTO): Observable<any> {
@@ -47,14 +51,11 @@ export class BusService {
     return this.http.delete<void>(`${environment.SERVER_URL}/bus/${id}`, this.httpOptions);
   }
 
-  // Método para obtener los buses con sus rutas y días
   getBusesDisponibles(): Observable<BusDTO[]> {
-    return this.http.get<BusDTO[]>(`${environment.SERVER_URL}/bus/disponibles`);
+    return this.http.get<BusDTO[]>(`${environment.SERVER_URL}/bus/disponibles`, this.httpOptions);
   }
 
-  // Metodo para asignar múltiples rutas a un bus
   asignarRuta(busId: number, rutaIds: number[]): Observable<BusDTO> {
     return this.http.post<BusDTO>(`${environment.SERVER_URL}/bus/${busId}/asignarRutas`, rutaIds, this.httpOptions);
   }
-
 }

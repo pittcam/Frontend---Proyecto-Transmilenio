@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
+import {Router, RouterLink} from '@angular/router';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-registrarse',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule,
+    RouterLink
+  ],
   templateUrl: './registrarse.component.html',
   styleUrl: './registrarse.component.css'
 })
