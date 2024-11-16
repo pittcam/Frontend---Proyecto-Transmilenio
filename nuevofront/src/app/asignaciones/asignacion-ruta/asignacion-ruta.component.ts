@@ -6,6 +6,7 @@ import { RutaService } from '../../shared/ruta.service';
 import { RutaDTO } from '../../dto/ruta-dto';
 import { BusService } from '../../shared/bus.service';
 import { catchError, of } from 'rxjs';
+import {AuthService} from '../../shared/auth.service';
 
 @Component({
   selector: 'app-asignacion-ruta',
@@ -23,12 +24,18 @@ export class AsignacionRutaComponent implements OnInit {
     private rutaService: RutaService,
     private router: Router,
     private route: ActivatedRoute,
-    private busService: BusService
+    private busService: BusService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
     this.busId = +this.route.snapshot.paramMap.get('id')!; // Obtener el ID del bus
     this.cargarRutasDisponibles(); // Cargar las rutas disponibles
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   // Cargar todas las rutas disponibles desde el servicio

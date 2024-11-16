@@ -52,3 +52,8 @@ button[type="submit"]:hover {
   color: #3498db;
   text-decoration: none;
 }
+
+h2 {
+  text-align: center; /* Centrar el texto del encabezado */
+  color: #333; /* Color de texto */
+}

@@ -5,7 +5,8 @@ import { RutaService } from '../../shared/ruta.service';
 import { EstacionDTO } from '../../dto/estacion-dto';
 import { FormsModule } from '@angular/forms';
 import { EstacionService } from '../../shared/estacion.service';
-import { CommonModule } from '@angular/common'; // Agrega esta importación
+import { CommonModule } from '@angular/common';
+import {AuthService} from '../../shared/auth.service'; // Agrega esta importación
 
 @Component({
   selector: 'app-ruta-create',
@@ -24,12 +25,18 @@ export class RutaCreateComponent implements OnInit {
   constructor(
     private rutaService: RutaService,
     private estacionService: EstacionService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.cargarEstaciones();
     this.generarHoras(); // Llamar a la función para generar horas de 5:00 a 21:00
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   generarHoras(): void {

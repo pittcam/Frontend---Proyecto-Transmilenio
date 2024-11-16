@@ -2,6 +2,8 @@
   <h1>Transmilenio</h1>
   <button routerLink="/conductores">Gestionar Conductores</button>
   <button routerLink="/buses">Gestionar Buses</button>
+  <button (click)="onLogout()">Cerrar sesión</button>
+
 </div>
 <form (ngSubmit)="guardarDias()" class="bus-create-form">
   <div *ngIf="ruta$ | async as ruta" class="ruta-detalle">

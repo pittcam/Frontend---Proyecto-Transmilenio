@@ -5,6 +5,7 @@ import {catchError, Observable, of} from 'rxjs';
 import {RutaDTO} from '../../dto/ruta-dto';
 import {RutaService} from '../../shared/ruta.service';
 import {Router, RouterLink} from '@angular/router';
+import {AuthService} from '../../shared/auth.service';
 
 @Component({
   selector: 'app-rutas-view',
@@ -24,7 +25,7 @@ export class RutasListComponent implements OnInit{
   errorMessage: string = ''; // Mensaje de error
   nombreBuscado: string = '';
 
-  constructor(private rutaService: RutaService, private router: Router) {} // Inyectar Router
+  constructor(private rutaService: RutaService, private router: Router, private authService: AuthService) {} // Inyectar Router
 
   ngOnInit(): void {
     this.cargarListaRutas();
@@ -34,6 +35,11 @@ export class RutasListComponent implements OnInit{
     if (id !== null) {
       this.router.navigate(['/consulta', id]); // Redirigir a la vista de la ruta con el id
     }
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   cargarListaRutas() {

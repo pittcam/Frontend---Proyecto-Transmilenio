@@ -6,6 +6,7 @@ import { EstacionDTO } from '../../dto/estacion-dto';
 import { FormsModule } from '@angular/forms';
 import { EstacionService } from '../../shared/estacion.service';
 import { CommonModule } from '@angular/common';
+import {AuthService} from '../../shared/auth.service';
 
 @Component({
   selector: 'app-ruta-edit',
@@ -27,13 +28,19 @@ export class RutaEditComponent implements OnInit {
     private rutaService: RutaService,
     private estacionService: EstacionService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.cargarEstaciones();
     this.cargarRuta();
     this.generarHoras(); // Generar horas de 5:00 a 21:00
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   generarHoras(): void {

@@ -7,6 +7,7 @@ import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
 import { Observable } from 'rxjs';
 import { RutaDTO } from '../../dto/ruta-dto';
 import { RutaService } from '../../shared/ruta.service';
+import {AuthService} from '../../shared/auth.service';
 
 @Component({
   selector: 'app-bus-create',
@@ -24,10 +25,14 @@ export class BusCreateComponent {
   constructor(
     private busService: BusService,
     private router: Router,
-    private rutaService: RutaService
+    private rutaService: RutaService,
+    private authService: AuthService
   ) {}
 
-
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 
   // Metodo para crear el bus
   crearBus(): void {

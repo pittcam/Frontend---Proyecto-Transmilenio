@@ -3,6 +3,7 @@ import {ActivatedRoute, Router, RouterLink} from '@angular/router'; // Importa A
 import { FormsModule } from '@angular/forms';
 import { ConductorDTO } from '../../dto/conductor-dto';
 import { ConductorService } from '../../shared/conductor.service';
+import {AuthService} from '../../shared/auth.service';
 
 @Component({
   selector: 'app-conductor-edit',
@@ -19,6 +20,7 @@ export class ConductorEditComponent implements OnInit { // Implementa OnInit
   constructor(
     private conductorService: ConductorService,
     private router: Router,
+    private authService: AuthService,
     private route: ActivatedRoute // Para acceder a los parámetros de la ruta
   ) {
     this.conductorDTO = new ConductorDTO(null, '', '', '', '');
@@ -27,6 +29,11 @@ export class ConductorEditComponent implements OnInit { // Implementa OnInit
   ngOnInit() {
     const id = this.route.snapshot.params['id']; // Obtiene el ID del conductor de la URL
     this.cargarConductor(id);
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   cargarConductor(id: number) {

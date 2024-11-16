@@ -8,6 +8,7 @@ import { RutaDTO } from '../../dto/ruta-dto';
 import { catchError, of, Observable } from 'rxjs';
 import { AsyncPipe, NgIf, CommonModule } from '@angular/common';
 import {BusRutaDiaService} from '../../shared/bus-ruta-dia.service';
+import {AuthService} from '../../shared/auth.service';
 
 @Component({
   selector: 'app-bus-view',
@@ -26,6 +27,7 @@ export class BusViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private busService: BusService,
+    private authService: AuthService,
     private busRutaDiaService: BusRutaDiaService,
     private rutaService: RutaService,
     private router: Router
@@ -44,6 +46,11 @@ export class BusViewComponent implements OnInit {
 
     // Cargar las rutas asignadas
     this.cargarRutasAsignadas(id);
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   cargarRutasAsignadas(busId: number): void {

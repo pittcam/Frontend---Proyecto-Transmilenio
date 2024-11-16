@@ -1,3 +1,29 @@
+.menu-bar {
+  background-color: red; /* Color de fondo rojo */
+  padding: 10px; /* Espaciado interno */
+  display: flex; /* Para que los botones estén en línea */
+  justify-content: space-around; /* Espacio entre botones */
+  align-items: center; /* Centrados verticalmente */
+}
+
+.menu-bar h1 {
+  color: white; /* Texto blanco */
+  margin: 0; /* Sin margen */
+}
+
+.menu-bar button {
+  background-color: yellow; /* Botones amarillos */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 10px 15px; /* Espaciado interno */
+  cursor: pointer; /* Cambia el cursor al pasar el mouse */
+}
+
+.menu-bar button:hover {
+  background-color: orange; /* Cambia de color al pasar el mouse */
+}
+
+
 .editar-bus-container {
   max-width: 500px; /* Ancho máximo para el contenedor */
   margin: 0 auto; /* Centrar horizontalmente */

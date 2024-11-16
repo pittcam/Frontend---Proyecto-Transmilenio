@@ -5,7 +5,8 @@ import { AsignacionService } from '../../shared/asignacion.service';
 import { ConductorDTO } from '../../dto/conductor-dto';
 import { BusDTO } from '../../dto/bus-dto';
 import { Observable, catchError, of } from 'rxjs';
-import { CommonModule } from '@angular/common'; // Importar CommonModule
+import { CommonModule } from '@angular/common';
+import {AuthService} from '../../shared/auth.service'; // Importar CommonModule
 
 @Component({
   selector: 'app-conductor-view',
@@ -23,6 +24,7 @@ export class ConductorViewComponent implements OnInit {
     private route: ActivatedRoute,
     private conductorService: ConductorService,
     private router: Router,
+    private authService: AuthService,
     private asignacionService: AsignacionService // Servicio de asignaciones
   ) {}
 
@@ -45,6 +47,11 @@ export class ConductorViewComponent implements OnInit {
           return of([]);
         })
       );
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   asignarBus(conductorId: number | null): void {

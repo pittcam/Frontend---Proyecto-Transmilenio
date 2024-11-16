@@ -1,6 +1,8 @@
 <div class="menu-bar">
   <h1>Transmilenio</h1>
   <button routerLink="/rutas">Gestionar Rutas</button>
+  <button (click)="onLogout()">Cerrar sesión</button>
+
 </div>
 <form (ngSubmit)="crearRuta()" class="ruta-form">
   <div class="form-group">

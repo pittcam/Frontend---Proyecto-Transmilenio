@@ -5,6 +5,7 @@ import { BusService } from '../../shared/bus.service'; // Asegúrate de que la r
 import { BusDTO } from '../../dto/bus-dto'; // Asegúrate de que la ruta sea correcta
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthService} from '../../shared/auth.service';
 
 @Component({
   selector: 'app-bus-list',
@@ -18,7 +19,12 @@ export class BusListComponent implements OnInit {
   errorMessage: string = '';
   placaBuscada: string = '';
 
-  constructor(private busService: BusService, private router: Router) {} // Inyectar Router
+  constructor(private busService: BusService, private router: Router, private authService: AuthService) {} // Inyectar Router
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 
   ngOnInit(): void {
     this.allBuses$ = this.busService.listarBuses()

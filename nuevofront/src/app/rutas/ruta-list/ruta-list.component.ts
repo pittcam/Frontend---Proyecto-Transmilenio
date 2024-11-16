@@ -5,6 +5,7 @@ import { RutaService } from '../../shared/ruta.service'; // Asegúrate de que la
 import { RutaDTO } from '../../dto/ruta-dto'; // Asegúrate de que la ruta sea correcta
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {AuthService} from '../../shared/auth.service';
 
 @Component({
   selector: 'app-ruta-list',
@@ -18,7 +19,7 @@ export class RutaListComponent implements OnInit {
   errorMessage: string = ''; // Mensaje de error
   nombreBuscado: string = '';
 
-  constructor(private rutaService: RutaService, private router: Router) {} // Inyectar Router
+  constructor(private rutaService: RutaService, private router: Router, private authService:AuthService) {} // Inyectar Router
 
   ngOnInit(): void {
     this.allRutas$ = this.rutaService.obtenerRutas()
@@ -29,6 +30,11 @@ export class RutaListComponent implements OnInit {
           return of([]); // Devuelve un arreglo vacío en caso de error
         })
       );
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   // Metodo para buscar conductor por nombre

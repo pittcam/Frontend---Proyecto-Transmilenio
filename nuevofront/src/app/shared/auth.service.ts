@@ -4,6 +4,8 @@ import { map, Observable, tap } from 'rxjs';
 import { Role } from '../dto/role';
 import { Auth } from '../dto/auth';
 import { environment } from '../../environments/environment.development';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +16,27 @@ export class AuthService {
   username: string | null = null;
 
   private baseUrl = `${environment.SERVER_URL}/autenticacion`;
+  private registerUrl = `${environment.SERVER_URL}/usuarios`;
 
   constructor(private http: HttpClient) {
     this.token = localStorage.getItem('auth_token');
     this.rol = localStorage.getItem('auth_role') as Role | null;
     this.username = localStorage.getItem('username');
   }
+
+  public register(user: any): Observable<any> {
+    return this.http.post(`${this.registerUrl}`, user, { observe: 'response' }).pipe(
+      tap((response) => {
+        console.log('Usuario registrado exitosamente', response);
+      }),
+      map((response) => response.body || {}), // Manejar caso de respuesta vacía
+      catchError((error) => {
+        console.error('Error al registrar usuario:', error);
+        return throwError(() => new Error(error.message || 'Error al registrar usuario.'));
+      })
+    );
+  }
+
 
   public async isAuthenticated(): Promise<boolean> {
     try {

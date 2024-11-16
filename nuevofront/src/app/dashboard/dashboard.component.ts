@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import {AuthService} from '../shared/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,17 +10,11 @@ import { Router, RouterModule } from '@angular/router';
   styleUrls: ['./dashboard.component.css'], // Asegúrate de que el nombre esté correcto
 })
 export class DashboardComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService:AuthService) {}
 
-  abrirCrearConductor() {
-    this.router.navigate(['/conductores']); // Navega a la pantalla de crear conductor
-  }
 
-  abrirGestionarBuses() {
-    this.router.navigate(['/buses']); // Navega a la pantalla de gestionar buses
-  }
-
-  abrirGestionarRutas() {
-    this.router.navigate(['/rutas']); // Navega a la pantalla de gestionar rutas
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

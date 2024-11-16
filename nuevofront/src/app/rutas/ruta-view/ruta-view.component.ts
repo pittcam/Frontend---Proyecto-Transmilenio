@@ -7,6 +7,7 @@ import { RutaDTO } from '../../dto/ruta-dto';
 import { EstacionDTO } from '../../dto/estacion-dto';
 import { catchError, Observable, of } from 'rxjs';
 import { AsyncPipe, NgIf, CommonModule } from '@angular/common';
+import {AuthService} from '../../shared/auth.service';
 
 @Component({
   selector: 'app-ruta-view',
@@ -24,7 +25,8 @@ export class RutaViewComponent implements OnInit {
     private route: ActivatedRoute,
     private rutaService: RutaService,
     private estacionService: EstacionService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +40,8 @@ export class RutaViewComponent implements OnInit {
       })
     );
 
+
+
     // Cargar todas las estaciones y asignarlas a la variable local
     this.estacionService.obtenerEstaciones().subscribe({
       next: (data: EstacionDTO[]) => {
@@ -47,6 +51,11 @@ export class RutaViewComponent implements OnInit {
         console.error('Error al cargar estaciones:', error);
       }
     });
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   volver(): void {

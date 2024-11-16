@@ -6,6 +6,7 @@ import { BusService } from '../../shared/bus.service';
 import {Observable} from 'rxjs';
 import {RutaDTO} from '../../dto/ruta-dto';
 import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
+import {AuthService} from '../../shared/auth.service';
 
 @Component({
   selector: 'app-bus-edit',
@@ -22,9 +23,15 @@ export class BusEditComponent implements OnInit {
   constructor(
     private busService: BusService,
     private router: Router,
-    private route: ActivatedRoute // Para acceder a los parámetros de la ruta
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) {
     this.busDTO = new BusDTO(null, '', ''); // Inicializa el busDTO
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   ngOnInit() {

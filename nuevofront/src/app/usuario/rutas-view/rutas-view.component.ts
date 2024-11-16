@@ -8,6 +8,7 @@ import {RutaService} from '../../shared/ruta.service';
 import {EstacionService} from '../../shared/estacion.service';
 import {RouterLink,Router} from '@angular/router';
 import {first} from 'rxjs/operators';
+import {AuthService} from '../../shared/auth.service';
 
 @Component({
   selector: 'app-ruta-view',
@@ -29,7 +30,8 @@ export class RutasViewComponent implements OnInit {
     private route: ActivatedRoute,
     private rutaService: RutaService,
     private estacionService: EstacionService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +45,8 @@ export class RutasViewComponent implements OnInit {
       })
     );
 
+
+
     // Cargar las estaciones y almacenarlas en la variable local
     this.estacionService.obtenerEstaciones().subscribe({
       next: (data: EstacionDTO[]) => {
@@ -52,6 +56,11 @@ export class RutasViewComponent implements OnInit {
         console.error('Error al cargar estaciones:', error);
       }
     });
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   volver(): void {

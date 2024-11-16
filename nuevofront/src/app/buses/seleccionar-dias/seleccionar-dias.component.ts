@@ -10,6 +10,7 @@ import { BusDTO } from '../../dto/bus-dto';
 import { BusRutaDiaService } from '../../shared/bus-ruta-dia.service';
 import { FormsModule } from '@angular/forms';
 import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
+import {AuthService} from '../../shared/auth.service';
 
 @Component({
   selector: 'app-seleccionar-dias',
@@ -38,7 +39,8 @@ export class SeleccionarDiasComponent implements OnInit {
     private rutaService: RutaService,
     private estacionService: EstacionService,
     private router: Router,
-    private busRutaDiaService: BusRutaDiaService
+    private busRutaDiaService: BusRutaDiaService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -72,6 +74,11 @@ export class SeleccionarDiasComponent implements OnInit {
         }
       }
     });
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   // Método para capturar cambios en los días seleccionados

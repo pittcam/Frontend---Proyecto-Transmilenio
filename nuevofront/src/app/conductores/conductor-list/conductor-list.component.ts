@@ -5,6 +5,7 @@ import { ConductorService } from '../../shared/conductor.service';
 import { ConductorDTO } from '../../dto/conductor-dto';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {AuthService} from '../../shared/auth.service';
 
 @Component({
   selector: 'app-conductor-list',
@@ -18,10 +19,15 @@ export class ConductorListComponent implements OnInit {
   errorMessage: string = '';
   nombreBuscado: string = '';
 
-  constructor(private conductorService: ConductorService, private router: Router) {} // Inyectar Router
+  constructor(private conductorService: ConductorService,private authService: AuthService, private router: Router) {} // Inyectar Router
 
   ngOnInit(): void {
     this.cargarListaConductores();
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   verConductor(id: number | null): void {

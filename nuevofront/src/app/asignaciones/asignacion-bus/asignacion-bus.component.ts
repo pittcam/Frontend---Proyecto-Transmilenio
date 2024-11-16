@@ -5,7 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AsignacionService } from '../../shared/asignacion.service';
 import { BusRutaDiaDTO } from '../../dto/bus-ruta-dia-dto';
-import {BusRutaDiaService} from '../../shared/bus-ruta-dia.service'; // Usamos BusRutaDiaDTO
+import {BusRutaDiaService} from '../../shared/bus-ruta-dia.service';
+import {AuthService} from '../../shared/auth.service'; // Usamos BusRutaDiaDTO
 
 @Component({
   selector: 'app-asignacion-bus',
@@ -25,6 +26,7 @@ export class AsignacionBusComponent implements OnInit {
     private busService: BusService,
     private asignacionService: AsignacionService,
     private busRutaDiaService: BusRutaDiaService,
+    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -37,6 +39,11 @@ export class AsignacionBusComponent implements OnInit {
     }
     this.cargarBusesDisponibles();
     this.obtenerAsignacion();
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   cargarBusesDisponibles() {
